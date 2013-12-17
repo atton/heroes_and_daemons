@@ -13,6 +13,10 @@ public class SlayerBehavior : MonoBehaviour, IDamage {
 
 	private SlayerStateMachine state;
 
+	void Awake() {
+		enabled = networkView.isMine;
+	}
+
 	// Use this for initialization
 	void Start () {
 		state = new SlayerStateMachine();

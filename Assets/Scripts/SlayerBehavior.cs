@@ -203,11 +203,7 @@ public class SlayerBehavior : MonoBehaviour, IDamage {
 	}
 	
 	void shoot() {
-		Vector3 spawnPoint = transform.position + transform.forward + new Vector3(0, 1, 0);
-
-		Rigidbody shot         = Instantiate(slayerShot, spawnPoint, Quaternion.identity) as Rigidbody;
-		shot.velocity          = transform.forward * 10;
-		shot.transform.forward = transform.forward;
+		networkView.RPC("netShoot", RPCMode.All, transform.position, transform.forward);
 	}
 	
 	void punch() {		
@@ -230,5 +226,15 @@ public class SlayerBehavior : MonoBehaviour, IDamage {
 			if (animation.IsPlaying(anim.name)) return anim.name;
 		}
 		return "AnimationNotFound";
+	}
+
+	/* RPCs */
+	[RPC]
+	void netShoot(Vector3 position, Vector3 forward) {
+		Vector3 spawnPoint = position + forward + new Vector3(0, 1, 0);
+		
+		Rigidbody shot         = Instantiate(slayerShot, spawnPoint, Quaternion.identity) as Rigidbody;
+		shot.velocity          = forward * 10;
+		shot.transform.forward = forward;
 	}
 }

@@ -22,7 +22,7 @@ public class NetworkClient : MonoBehaviour {
 	private const int serverListMenuID = 1;
 	
 	/* const variables */
-	private const string loadTargetLevelName = "test_field";
+	private const string loadTargetLevelName = "NetworkTestField";
 	
 	
 	/* debug inforamation */

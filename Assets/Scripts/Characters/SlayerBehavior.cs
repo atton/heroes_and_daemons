@@ -152,7 +152,7 @@ public class SlayerBehavior : CharacterBehavior {
 	void AttackingMeleeAction(int frameCount) {
 		if (frameCount == 0) {
 			animation.Play("attackingmelee");
-			punch();
+			attackMelee();
 		}
 		if (!animation.IsPlaying("attackingmelee")) {
 			state.EndNowState(); 
@@ -207,18 +207,21 @@ public class SlayerBehavior : CharacterBehavior {
 		}
 	}
 	
-	void punch() {		
-		Vector3 spawnPoint = transform.position + transform.forward;
-		Instantiate(slayerPunch, spawnPoint, Quaternion.identity);
+	void attackMelee() {		
+		if (Network.peerType == NetworkPeerType.Client || Network.peerType == NetworkPeerType.Server) {
+			networkView.RPC("spawnMelee", RPCMode.All, transform.position, transform.forward);
+		} else {
+			spawnMelee(transform.position, transform.forward);
+		}
 	}
 
 	/* interface methods */
-	/*
+
 	public override void Damage(DamageInfo info) {
 		hitPoint -= info.DamageValue();
 
 		Debug.Log(hitPoint);
-	}*/
+	}
 	
 	/* utils */
 	
@@ -237,5 +240,11 @@ public class SlayerBehavior : CharacterBehavior {
 		Rigidbody shot         = Instantiate(slayerShot, spawnPoint, Quaternion.identity) as Rigidbody;
 		shot.velocity          = forward * 10;
 		shot.transform.forward = forward;
+	}
+
+	[RPC]
+	void spawnMelee(Vector3 position, Vector3 forward) {
+		Vector3 spawnPoint = position + forward;
+		Instantiate(slayerPunch, spawnPoint, Quaternion.identity);
 	}
 }

@@ -203,7 +203,11 @@ public class SlayerBehavior : MonoBehaviour, IDamage {
 	}
 	
 	void shoot() {
-		networkView.RPC("netShoot", RPCMode.All, transform.position, transform.forward);
+		if (Network.peerType == NetworkPeerType.Connecting) {
+			networkView.RPC("spawnShoot", RPCMode.All, transform.position, transform.forward);
+		} else {
+			spawnShoot(transform.position, transform.forward);
+		}
 	}
 	
 	void punch() {		
@@ -230,7 +234,7 @@ public class SlayerBehavior : MonoBehaviour, IDamage {
 
 	/* RPCs */
 	[RPC]
-	void netShoot(Vector3 position, Vector3 forward) {
+	void spawnShoot(Vector3 position, Vector3 forward) {
 		Vector3 spawnPoint = position + forward + new Vector3(0, 1, 0);
 		
 		Rigidbody shot         = Instantiate(slayerShot, spawnPoint, Quaternion.identity) as Rigidbody;

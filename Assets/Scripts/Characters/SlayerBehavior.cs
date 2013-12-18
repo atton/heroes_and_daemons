@@ -3,15 +3,12 @@ using System.Collections;
 using StateMachine;
 using CharacterInterface;
 
-public class SlayerBehavior : MonoBehaviour, IDamage {
+public class SlayerBehavior : CharacterBehavior {
 	
 	public Rigidbody  slayerShot;
 	public GameObject slayerPunch;
 	
 	const float runSpeed = 20.0f;
-	private int hitPoint = 100; // temporary set variable. TODO: create character parameter class;
-
-	private SlayerStateMachine state;
 
 	void Awake() {
 		enabled = networkView.isMine;
@@ -203,7 +200,7 @@ public class SlayerBehavior : MonoBehaviour, IDamage {
 	}
 	
 	void shoot() {
-		if (Network.peerType == NetworkPeerType.Connecting) {
+		if (Network.peerType == NetworkPeerType.Client || Network.peerType == NetworkPeerType.Server) {
 			networkView.RPC("spawnShoot", RPCMode.All, transform.position, transform.forward);
 		} else {
 			spawnShoot(transform.position, transform.forward);
@@ -216,12 +213,12 @@ public class SlayerBehavior : MonoBehaviour, IDamage {
 	}
 
 	/* interface methods */
-
-	public void Damage(DamageInfo info) {
+	/*
+	public override void Damage(DamageInfo info) {
 		hitPoint -= info.DamageValue();
 
 		Debug.Log(hitPoint);
-	}
+	}*/
 	
 	/* utils */
 	

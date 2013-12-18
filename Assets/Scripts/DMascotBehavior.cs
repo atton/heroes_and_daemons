@@ -2,7 +2,7 @@
 using System.Collections;
 using CharacterInterface;
 
-public class DMascotBehavior : MonoBehaviour {
+public class DMascotBehavior : MonoBehaviour, IDamage {
 
 	public  int MaxHitPoint = 100;
 	private int hitPoint;

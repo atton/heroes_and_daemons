@@ -22,12 +22,15 @@ public class PunchBehavior : MonoBehaviour {
 		Vector3 punch_vector = (collision.transform.position - transform.position);
 		collision.gameObject.rigidbody.AddForce(punchPower * punch_vector);
 
-		
-		// FIXME: check IDamage interface and call Damage method in this place. but it's send message style.
 		DamageInfo info = new DamageInfo();
 		info.SetDamageValue(punchDamageValue);
-		collision.gameObject.SendMessage("Damage", info, SendMessageOptions.DontRequireReceiver);
-		
+
+		MonoBehaviour[] behaviors =  collision.gameObject.GetComponents<MonoBehaviour>();
+		foreach (MonoBehaviour b in behaviors) {
+			IDamage i = b as IDamage;
+			if (i != null) 	i.Damage(info);
+		}
+
 		Instantiate(hitEffect, transform.position, Quaternion.identity);
 		Destroy(gameObject);
 	}

@@ -24,6 +24,7 @@ public class SlayerBehavior : CharacterBehavior {
 		UpdateStateFromInput();
 		state.UpdateFrameCount();
 		ActionFromState();
+		base.Update();
 	}
 
 	void UpdateStateFromInput() {

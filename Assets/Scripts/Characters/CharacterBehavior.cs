@@ -39,4 +39,14 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 		}
 	}
 
+	public virtual void focusCamera() {
+		GameObject mainCamera = GameObject.Find("Main Camera");
+		Component[] components = mainCamera.GetComponents<MonoBehaviour>();
+		
+		foreach (Component c in components) {
+			Cameracontrol control = c as Cameracontrol;
+			if (control != null) control.player = gameObject;
+		}
+	}
+
 }

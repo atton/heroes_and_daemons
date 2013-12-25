@@ -9,14 +9,7 @@ public class SinglePlayerSpawn : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject player = Instantiate(spawnPrefab, spawnPoint, spawnRotation) as GameObject;
-		GameObject mainCamera = GameObject.Find("Main Camera");
-		Component[] components = mainCamera.GetComponents<MonoBehaviour>();
-
-		foreach (Component c in components) {
-			Cameracontrol control = c as Cameracontrol;
-			if (control != null) control.player = player;
-		}
+		Instantiate(spawnPrefab, spawnPoint, spawnRotation);
 	}
 	
 	// Update is called once per frame

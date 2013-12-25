@@ -12,10 +12,16 @@ public class DMascotBehavior : CharacterBehavior {
 	// Use this for initialization
 	void Start () {
 		hitPoint = MaxHitPoint;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		base.Update();
+	}
+
+	void focusCamre() {
+		// overwrite focusCamera by empty
+		// because DMascot is not player
 	}
 }

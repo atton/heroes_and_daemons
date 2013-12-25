@@ -10,13 +10,13 @@ public class SlayerBehavior : CharacterBehavior {
 	
 	const float runSpeed = 20.0f;
 
-	void Awake() {
-		enabled = networkView.isMine;
-	}
 
 	// Use this for initialization
 	void Start () {
-		state = new SlayerStateMachine();
+		state   = new SlayerStateMachine();
+		enabled = networkView.isMine;
+
+		if (enabled) focusCamera();
 	}
 	
 	// Update is called once per frame

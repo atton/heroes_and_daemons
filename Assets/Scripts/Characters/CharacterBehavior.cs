@@ -18,7 +18,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 	protected float zRange = 20.0f;
 
 
-	protected void Update() {
+	protected virtual void Update() {
 		positionControl();
 	}
 

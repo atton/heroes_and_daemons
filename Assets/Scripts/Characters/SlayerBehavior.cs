@@ -21,7 +21,7 @@ public class SlayerBehavior : CharacterBehavior {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	override protected void Update () {
 		UpdateStateFromInput();
 		state.UpdateFrameCount();
 		ActionFromState();

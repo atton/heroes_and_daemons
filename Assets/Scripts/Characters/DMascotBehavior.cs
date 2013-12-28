@@ -16,7 +16,7 @@ public class DMascotBehavior : CharacterBehavior {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	override protected void Update () {
 		base.Update();
 	}
 

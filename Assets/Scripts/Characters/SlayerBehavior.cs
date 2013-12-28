@@ -63,6 +63,8 @@ public class SlayerBehavior : CharacterBehavior {
 		CharacterState cs = state.NowState();
 		int frameCount    = state.FrameCount();
 
+		if (frameCount == 0) characterAnimation.PlayAnimationFromState(cs);
+
 		switch (cs) {
 
 		case CharacterState.Stand:
@@ -109,8 +111,6 @@ public class SlayerBehavior : CharacterBehavior {
 			Debug.Log("unknown state : " + state.NowState());
 			break;
 		}
-
-		if (frameCount == 0) characterAnimation.PlayAnimationFromState(cs);
 	}
 
 	/* Actions */

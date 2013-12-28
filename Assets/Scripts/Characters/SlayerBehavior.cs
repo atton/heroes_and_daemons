@@ -60,9 +60,10 @@ public class SlayerBehavior : CharacterBehavior {
 	}
 
 	void ActionFromState() {
-		int frameCount = state.FrameCount();
+		CharacterState cs = state.NowState();
+		int frameCount    = state.FrameCount();
 
-		switch (state.NowState()) {
+		switch (cs) {
 
 		case CharacterState.Stand:
 			StandAction(frameCount);
@@ -108,49 +109,41 @@ public class SlayerBehavior : CharacterBehavior {
 			Debug.Log("unknown state : " + state.NowState());
 			break;
 		}
+
+		if (frameCount == 0) characterAnimation.PlayAnimationFromState(cs);
 	}
 
 	/* Actions */
 
 	void StandAction(int frameCount) {
-		if (frameCount == 0) characterAnimation.PlayAnimationFromState(CharacterState.Stand);
-
 		if (transform.position.y > 0) state.TryTransform(CharacterState.Aerial);
 	}
 
 	void JumpStartAction(int frameCount) {
-		if (frameCount == 0) characterAnimation.PlayAnimationFromState(CharacterState.JumpStart);
 		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.Jump);
-
 	}
+
 	void JumpAction(int frameCount) {
 		if (frameCount == 0) {
-			characterAnimation.PlayAnimationFromState(CharacterState.Jump);
 			rigidbody.AddForce(new Vector3(0, 10 * runSpeed, 0));
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.Aerial);
 	}
 
 	void AerialAction(int frameCount) {
-		characterAnimation.PlayAnimationFromState(CharacterState.Aerial);
-
 		if (transform.position.y <= 0) state.EndNowState();
 	}
 
 	void RunAction(int frameCount) {
-		if (frameCount == 0) characterAnimation.PlayAnimationFromState(CharacterState.Run);
-
 		if (rigidbody.velocity == Vector3.zero)	state.EndNowState();
 	}
 
 	void AttackStartMeleeAction(int frameCount) {
-		if (frameCount == 0) characterAnimation.PlayAnimationFromState(CharacterState.AttackStartMelee);
 		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.AttackingMelee);
 	}
 
 	void AttackingMeleeAction(int frameCount) {
 		if (frameCount == 0) {
-			characterAnimation.PlayAnimationFromState(CharacterState.AttackingMelee);
 			attackMelee();
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) {
@@ -167,7 +160,6 @@ public class SlayerBehavior : CharacterBehavior {
 
 	void AttackingShootAction(int frameCount) {
 		if (frameCount == 0) {
-			characterAnimation.PlayAnimationFromState(CharacterState.AttackingShoot);
 			shoot();
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) {
@@ -178,7 +170,6 @@ public class SlayerBehavior : CharacterBehavior {
 	
 	void AttackRunShootAction(int frameCount) {
 		if (frameCount == 0) {
-			characterAnimation.PlayAnimationFromState(CharacterState.AttackRunShoot);
 			shoot();
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) {

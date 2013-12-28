@@ -4,6 +4,11 @@ using StateMachine;
 
 public class SlayerAnimation : CharacterAnimation {
 
+	public void Awake() {
+		animation["stand"].wrapMode = WrapMode.Loop;
+		animation["run"].wrapMode   = WrapMode.Loop;
+	}
+
 	public override void PlayAnimationFromState (StateMachine.CharacterState cs) {
 
 		switch (cs) {

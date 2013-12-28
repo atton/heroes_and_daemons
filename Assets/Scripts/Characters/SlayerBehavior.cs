@@ -113,9 +113,7 @@ public class SlayerBehavior : CharacterBehavior {
 	/* Actions */
 
 	void StandAction(int frameCount) {
-		if (frameCount == 0 || characterAnimation.IsFinishedNowAnimation()) {
-			characterAnimation.PlayAnimationFromState(CharacterState.Stand);
-		}
+		if (frameCount == 0) characterAnimation.PlayAnimationFromState(CharacterState.Stand);
 
 		if (transform.position.y > 0) state.TryTransform(CharacterState.Aerial);
 	}
@@ -140,9 +138,7 @@ public class SlayerBehavior : CharacterBehavior {
 	}
 
 	void RunAction(int frameCount) {
-		if (frameCount == 0 || characterAnimation.IsFinishedNowAnimation()) {
-			characterAnimation.PlayAnimationFromState(CharacterState.Run);
-		}
+		if (frameCount == 0) characterAnimation.PlayAnimationFromState(CharacterState.Run);
 
 		if (rigidbody.velocity == Vector3.zero)	state.EndNowState();
 	}

@@ -2,7 +2,7 @@ using System;
 
 namespace StateMachine {
 	public enum CharacterState {
-		None,
+		None = 0,
 		Stand,
 		Aerial,
 		Hurt,

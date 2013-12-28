@@ -6,6 +6,7 @@ using CharacterInterface;
 public class CharacterBehavior : MonoBehaviour, IDamage {
 
 	protected CharacterStateMachine state;
+	protected CharacterAnimation    characterAnimation;
 
 	/* TODO : this parameters split into character status class */
 	public    int MaxHitPoint = 100;

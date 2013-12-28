@@ -330,6 +330,8 @@ GameObject:
   - 114: {fileID: 11400000}
   - 111: {fileID: 11100000}
   - 148: {fileID: 14800000}
+  - 148: {fileID: 14800002}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: Slayer
   m_TagString: Untagged
@@ -915,8 +917,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b34898ed8dd4662b9db33bb71ebae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHitPoint: 100
   slayerShot: {fileID: 5400000, guid: 74d4b9ad4f36248d1ba60f364cdca7f5, type: 2}
   slayerPunch: {fileID: 100000, guid: 4dd2e7e530a484d42b86cd9583bf93ed, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc27ed54c882d415b81868f0a76961fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -984,6 +998,18 @@ NetworkView:
   m_Enabled: 1
   m_StateSynchronization: 1
   m_Observed: {fileID: 400042}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
+--- !u!148 &14800002
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 11400002}
   m_ViewID:
     m_ID: 0
     m_Type: 0

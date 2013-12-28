@@ -4,7 +4,7 @@ using System.Collections;
 public class NetworkClient : MonoBehaviour {
 	
 	/* master server settings */
-	public const string masterServerIP   = "133.13.57.57";
+	public const string masterServerIP   = "127.0.0.1";
 	public const int  masterServerPort   = 23466;
 	public const bool masterServerUseNat = false;
 	

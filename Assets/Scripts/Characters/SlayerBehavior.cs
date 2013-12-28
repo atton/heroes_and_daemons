@@ -13,8 +13,9 @@ public class SlayerBehavior : CharacterBehavior {
 
 	// Use this for initialization
 	void Start () {
-		state   = new SlayerStateMachine();
-		enabled = networkView.isMine;
+		state              = new SlayerStateMachine();
+		characterAnimation = gameObject.GetComponent<SlayerAnimation>();
+		enabled            = networkView.isMine;
 
 		if (enabled) focusCamera();
 	}
@@ -112,67 +113,68 @@ public class SlayerBehavior : CharacterBehavior {
 	/* Actions */
 
 	void StandAction(int frameCount) {
-		animation.Play("stand");
+		if (frameCount == 0 || characterAnimation.IsFinishedNowAnimation()) {
+			characterAnimation.PlayAnimationFromState(CharacterState.Stand);
+		}
 
 		if (transform.position.y > 0) state.TryTransform(CharacterState.Aerial);
 	}
 
 	void JumpStartAction(int frameCount) {
-		if (frameCount == 0) animation.Play("jumpstart");
-		if (!animation.IsPlaying("jumpstart")) state.TryTransform(CharacterState.Jump);
+		if (frameCount == 0) characterAnimation.PlayAnimationFromState(CharacterState.JumpStart);
+		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.Jump);
 
 	}
 	void JumpAction(int frameCount) {
 		if (frameCount == 0) {
-			animation.Play("jump");
+			characterAnimation.PlayAnimationFromState(CharacterState.Jump);
 			rigidbody.AddForce(new Vector3(0, 10 * runSpeed, 0));
 		}
-		if (!animation.IsPlaying("jump")) state.TryTransform(CharacterState.Aerial);
+		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.Aerial);
 	}
 
 	void AerialAction(int frameCount) {
-		animation.Play("jump");
-		animation["jump"].time = animation["jump"].length;      // last frame of jump animation
+		characterAnimation.PlayAnimationFromState(CharacterState.Aerial);
 
 		if (transform.position.y <= 0) state.EndNowState();
 	}
 
 	void RunAction(int frameCount) {
-		animation.Play("run");
-
-		if (rigidbody.velocity == Vector3.zero) {
-			state.EndNowState();
+		if (frameCount == 0 || characterAnimation.IsFinishedNowAnimation()) {
+			characterAnimation.PlayAnimationFromState(CharacterState.Run);
 		}
+
+		if (rigidbody.velocity == Vector3.zero)	state.EndNowState();
 	}
 
 	void AttackStartMeleeAction(int frameCount) {
-		if (frameCount == 0) animation.Play("attackstartmelee");
-		if (!animation.IsPlaying("attackstartmelee")) state.TryTransform(CharacterState.AttackingMelee);
+		if (frameCount == 0) characterAnimation.PlayAnimationFromState(CharacterState.AttackStartMelee);
+		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.AttackingMelee);
 	}
 
 	void AttackingMeleeAction(int frameCount) {
 		if (frameCount == 0) {
-			animation.Play("attackingmelee");
+			characterAnimation.PlayAnimationFromState(CharacterState.AttackingMelee);
 			attackMelee();
 		}
-		if (!animation.IsPlaying("attackingmelee")) {
+		if (characterAnimation.IsFinishedNowAnimation()) {
 			state.EndNowState(); 
 			// Please Add Skill cooling
 		}
 	}
 
 	void AttackStartShootAction(int frameCount) {
-		if (frameCount == 0) animation.Play("attackstartshoot");
+		if (frameCount == 0) characterAnimation.PlayAnimationFromState(CharacterState.AttackStartShoot);
 
-		if (!animation.IsPlaying("attackstartshoot")) state.TryTransform(CharacterState.AttackingShoot);
+		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.AttackingShoot);
 	}
 
 	void AttackingShootAction(int frameCount) {
 		if (frameCount == 0) {
-			animation.Play("attackingshoot");
+			characterAnimation.PlayAnimationFromState(CharacterState.AttackingShoot);
 			shoot();
 		}
-		if (!animation.IsPlaying("attackingshoot")) {
+		if (characterAnimation.IsFinishedNowAnimation()) {
 			state.EndNowState(); 
 			// Please Add Skill cooling
 		}
@@ -180,10 +182,10 @@ public class SlayerBehavior : CharacterBehavior {
 	
 	void AttackRunShootAction(int frameCount) {
 		if (frameCount == 0) {
-			animation.Play("attackrunshoot");
+			characterAnimation.PlayAnimationFromState(CharacterState.AttackRunShoot);
 			shoot();
 		}
-		if (!animation.IsPlaying("attackrunshoot")) {
+		if (characterAnimation.IsFinishedNowAnimation()) {
 			state.EndNowState(); 
 			// Please Add Skill cooling
 		}

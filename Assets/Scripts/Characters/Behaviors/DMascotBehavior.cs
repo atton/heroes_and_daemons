@@ -3,16 +3,19 @@ using System.Collections;
 using CharacterInterface;
 
 public class DMascotBehavior : CharacterBehavior {
+
+	void Awake() {
+		parameter = new DMascotParameter();
+	}
 	
 	void OnGUI() {
-		string hitPointStr = hitPoint.ToString() + "/" + MaxHitPoint.ToString();
+		string hitPointStr = parameter.HitPoint.ToString() + "/" + parameter.MaxHitPoint.ToString();
 		GUI.Label(new Rect(20, 20, 100, 20), hitPointStr);	// show HP on left top
 	}
 
 	// Use this for initialization
 	void Start () {
-		hitPoint = MaxHitPoint;
-
+		
 	}
 	
 	// Update is called once per frame

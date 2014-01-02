@@ -7,12 +7,10 @@ public class SlayerBehavior : CharacterBehavior {
 	
 	public Rigidbody  slayerShot;
 	public GameObject slayerPunch;
-	
-	const float runSpeed = 20.0f;
-
 
 	// Use this for initialization
 	void Start () {
+		parameter          = new SlayerParameter();
 		state              = new SlayerStateMachine();
 		characterAnimation = gameObject.GetComponent<SlayerAnimation>();
 		enabled            = networkView.isMine;
@@ -125,7 +123,7 @@ public class SlayerBehavior : CharacterBehavior {
 
 	void JumpAction(int frameCount) {
 		if (frameCount == 0) {
-			rigidbody.AddForce(new Vector3(0, 10 * runSpeed, 0));
+			rigidbody.AddForce(new Vector3(0, 10 * parameter.RunSpeed, 0));
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.Aerial);
 	}
@@ -183,7 +181,7 @@ public class SlayerBehavior : CharacterBehavior {
 	void move(Vector3 moveVector) {
 		if (state.NowState() != CharacterState.Run) return;
 
-		Vector3 run_vector = runSpeed * moveVector;
+		Vector3 run_vector = parameter.RunSpeed * moveVector;
 	
 		rigidbody.AddForce(run_vector);
 	 	transform.rotation = Quaternion.LookRotation(moveVector);
@@ -208,9 +206,6 @@ public class SlayerBehavior : CharacterBehavior {
 	/* interface methods */
 
 	public override void Damage(DamageInfo info) {
-		hitPoint -= info.DamageValue();
-
-		Debug.Log(hitPoint);
 	}
 	
 	/* utils */

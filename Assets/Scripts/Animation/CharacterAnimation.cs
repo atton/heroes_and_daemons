@@ -41,7 +41,7 @@ public class CharacterAnimation : MonoBehaviour {
 		}
 
 		if (stream.isReading) {
-			int state = -1;		// dummy paramter for receive variable
+			int state = -1;		// dummy parameter for receive variable
 			stream.Serialize(ref state);
 			PlayAnimationFromState((CharacterState)state);
 			return;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameInitializer : MonoBehaviour {
+public class GameController : MonoBehaviour {
 	
 	public GameObject playerCharacter;	// assign player character prefab on GUI
 	
@@ -9,6 +9,7 @@ public class GameInitializer : MonoBehaviour {
 	Quaternion initRotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 	
 	void Awake() {
+		enabled = networkView.isMine;
 		CreateNewPlayerCharacter();
 	}
 

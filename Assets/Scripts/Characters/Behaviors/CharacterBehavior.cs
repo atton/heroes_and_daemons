@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GameSystem;
 using StateMachine;
 using CharacterInterface;
 
 public class CharacterBehavior : MonoBehaviour, IDamage {
+
+	protected GameController controller;
 
 	protected CharacterStateMachine state;
 	protected CharacterAnimation    characterAnimation;
@@ -42,4 +45,9 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 		}
 	}
 
+	/* getter setter */
+	public GameController Controller {
+		get { return this.controller; }
+		set { this.controller = value; }
+	}
 }

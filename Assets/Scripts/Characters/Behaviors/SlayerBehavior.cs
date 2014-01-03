@@ -10,6 +10,7 @@ public class SlayerBehavior : CharacterBehavior {
 
 	// Use this for initialization
 	void Start () {
+		controller         = Object.FindObjectOfType<GameSystem.GameController>();
 		parameter          = new SlayerParameter();
 		state              = new SlayerStateMachine();
 		characterAnimation = gameObject.GetComponent<SlayerAnimation>();
@@ -206,6 +207,12 @@ public class SlayerBehavior : CharacterBehavior {
 	/* interface methods */
 
 	public override void Damage(DamageInfo info) {
+		parameter.Damage(info);
+		Debug.LogError("hit : id = " + networkView.owner.ToString() + ", HP = " + parameter.HitPoint);
+
+		if (parameter.HitPoint <= 0) {
+			controller.NoticeKnockoutPlayer(networkView.owner);
+		}
 	}
 	
 	/* utils */

@@ -13,13 +13,20 @@ namespace GameSystem {
 
 		// Use this for initialization
 		void Start () {
-			Instantiate(spawnPrefab, spawnPoint, spawnRotation);
+			GameObject obj = Instantiate(spawnPrefab, spawnPoint, spawnRotation) as GameObject;
+			CharacterBehavior character = obj.GetComponent<CharacterBehavior>();
+			character.Controller = this;
 		}
 
 		// Update is called once per frame
 		void Update () {
 
 		}
+
+		public override void NoticeKnockoutPlayer (NetworkPlayer pl) {
+			Debug.Log("D Mascot is deleted.");
+		}
+	
 	}
 
 }

@@ -6,6 +6,7 @@ public class DMascotBehavior : CharacterBehavior {
 
 	void Awake() {
 		parameter = new DMascotParameter();
+		controller = Object.FindObjectOfType<GameSystem.GameController>();
 	}
 	
 	void OnGUI() {
@@ -26,5 +27,13 @@ public class DMascotBehavior : CharacterBehavior {
 	void focusCamre() {
 		// overwrite focusCamera by empty
 		// because DMascot is not player
+	}
+
+	public override void Damage (DamageInfo info) {
+		base.Damage(info);
+		if (parameter.HitPoint <= 0) {
+			Destroy(gameObject);
+			controller.NoticeKnockoutPlayer(networkView.owner);
+		}
 	}
 }

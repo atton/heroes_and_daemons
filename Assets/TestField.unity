@@ -539,6 +539,7 @@ GameObject:
   - 65: {fileID: 768329291}
   - 54: {fileID: 768329292}
   - 114: {fileID: 768329293}
+  - 148: {fileID: 768329294}
   m_Layer: 0
   m_Name: d_mascot
   m_TagString: Untagged
@@ -624,6 +625,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb6f007cc1f84204b2bf116ac749737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!148 &768329294
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768329288}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 768329289}
+  m_ViewID:
+    m_ID: 1
+    m_Type: 1
 --- !u!1 &793971610
 GameObject:
   m_ObjectHideFlags: 0

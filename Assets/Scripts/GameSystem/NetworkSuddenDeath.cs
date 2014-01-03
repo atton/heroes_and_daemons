@@ -9,6 +9,7 @@ namespace GameSystem {
 
 		void Awake() {
 			CreateNewPlayerCharacter(SlayerPrefab);
+
 		}
 		
 		void CreateNewPlayerCharacter(GameObject targetPrefab) {
@@ -16,11 +17,21 @@ namespace GameSystem {
 			GameObject obj = Network.Instantiate(targetPrefab, initPosition, initRotation, 1) as GameObject;
 			int playerId = System.Int32.Parse(obj.networkView.owner.ToString());
 			obj.transform.position += new Vector3(0.0f, 0.0f, playerId*3);
+			if (obj.networkView.isMine) selfNetworkPlayer = obj.networkView.owner;
 		}
 
 		
 		void OnPlayerDisconnected(NetworkPlayer pl) {
 			Network.DestroyPlayerObjects(pl);
 		}
+
+		public override void NoticeKnockoutPlayer (NetworkPlayer pl) {
+			if (selfNetworkPlayer == pl) {
+				Debug.LogError("You Lose");
+			} else {
+				Debug.LogError("You Win");
+			}
+		}
+
 	}
 }

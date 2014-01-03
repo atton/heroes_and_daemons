@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// spawn single player for local test environment
+
 public class SinglePlayerSpawn : MonoBehaviour {
 
 	public GameObject spawnPrefab;

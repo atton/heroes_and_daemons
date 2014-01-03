@@ -19,12 +19,4 @@ public class GameInitializer : MonoBehaviour {
 	void OnPlayerDisconnected(NetworkPlayer pl) {
 		Network.DestroyPlayerObjects(pl);
 	}
-	
-	void OnConnectedToServer() {
-		CreateNewPlayerCharacter();
-	}
-	
-	void OnServerInitialized() {
-		CreateNewPlayerCharacter();
-	}
 }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/* Server Initialize and Connect to Server Script */
+
 public class NetworkClient : MonoBehaviour {
 	
 	/* master server settings */

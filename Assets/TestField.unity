@@ -252,7 +252,7 @@ GameObject:
   - 4: {fileID: 334836327}
   - 114: {fileID: 334836326}
   m_Layer: 0
-  m_Name: SinglePlayerSpawn
+  m_Name: GameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,9 +266,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 334836325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3115c000fda4b4cf893d6fd397a5ade6, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c637d62e243f45dd906fa1a661845dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlayerPrefab: {fileID: 100042, guid: 9838fe7b253314bbe9501bed22b09dba, type: 2}
   spawnPrefab: {fileID: 100042, guid: 9838fe7b253314bbe9501bed22b09dba, type: 2}
 --- !u!4 &334836327
 Transform:

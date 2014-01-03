@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: 4fbcb3c2df0e34b18a3c3adc67a07560
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - SlayerPrefab: {fileID: 100042, guid: 9838fe7b253314bbe9501bed22b09dba, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

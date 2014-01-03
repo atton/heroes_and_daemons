@@ -9,12 +9,13 @@ public class GameController : MonoBehaviour {
 	Quaternion initRotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 	
 	void Awake() {
-		enabled = networkView.isMine;
 		CreateNewPlayerCharacter();
 	}
 
 	void CreateNewPlayerCharacter() {
-		Network.Instantiate(playerCharacter, initPosition, initRotation, 1);
+		GameObject obj = Network.Instantiate(playerCharacter, initPosition, initRotation, 1) as GameObject;
+		int playerId = System.Int32.Parse(obj.networkView.owner.ToString());
+		obj.transform.position += new Vector3(0.0f, 0.0f, playerId*3);
 	}
 	
 	void OnPlayerDisconnected(NetworkPlayer pl) {

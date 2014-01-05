@@ -30,6 +30,10 @@ public class SlayerAnimation : CharacterAnimation {
 			animation["jump"].time = animation["jump"].length;      // last frame of jump animation
 			break;
 		
+		case CharacterState.Hurt:
+			PlayAnimation("hurt");
+			break;
+		
 		case CharacterState.Run:
 			PlayAnimation("run");
 			break;
@@ -52,6 +56,10 @@ public class SlayerAnimation : CharacterAnimation {
 		
 		case CharacterState.AttackRunShoot:
 			PlayAnimation("attackrunshoot");
+			break;
+
+		default:
+			Debug.Log("Undefined actions to " + cs.ToString());
 			break;
 		}
 

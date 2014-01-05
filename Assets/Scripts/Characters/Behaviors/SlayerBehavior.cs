@@ -86,6 +86,10 @@ public class SlayerBehavior : CharacterBehavior {
 			AerialAction(frameCount);
 			break;
 
+		case CharacterState.Hurt:
+			HurtAction(frameCount);
+			break;
+
 		case CharacterState.AttackStartShoot:
 			AttackStartShootAction(frameCount);
 			break;
@@ -132,6 +136,10 @@ public class SlayerBehavior : CharacterBehavior {
 	void AerialAction(int frameCount) {
 		if (transform.position.y <= 0) state.EndNowState();
 	}
+	
+	void HurtAction(int frameCount) {
+		if (characterAnimation.IsFinishedNowAnimation()) state.EndNowState();
+	}
 
 	void RunAction(int frameCount) {
 		if (rigidbody.velocity == Vector3.zero)	state.EndNowState();
@@ -176,7 +184,7 @@ public class SlayerBehavior : CharacterBehavior {
 			// Please Add Skill cooling
 		}
 	}
-
+	
 	/* Action Helpers */
 	
 	void move(Vector3 moveVector) {
@@ -209,6 +217,9 @@ public class SlayerBehavior : CharacterBehavior {
 	public override void Damage(DamageInfo info) {
 		parameter.Damage(info);
 		Debug.LogError("hit : id = " + networkView.owner.ToString() + ", HP = " + parameter.HitPoint);
+
+		// TODO : check hurt condition if required. this implement is force hurt in Damage.
+		state.TryTransform(CharacterState.Hurt);
 
 		if (parameter.HitPoint <= 0) {
 			controller.NoticeKnockoutPlayer(networkView.owner);

@@ -568,7 +568,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1959418108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fbcb3c2df0e34b18a3c3adc67a07560, type: 3}
+  m_Script: {fileID: 11500000, guid: fb5317ff229c74f4a8f68a3547e83f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SlayerPrefab: {fileID: 100042, guid: 9838fe7b253314bbe9501bed22b09dba, type: 2}

@@ -2,6 +2,7 @@
 using System.Collections;
 using StateMachine;
 using CharacterInterface;
+using GameSystem.GameController;
 
 public class SlayerBehavior : CharacterBehavior {
 	
@@ -10,7 +11,7 @@ public class SlayerBehavior : CharacterBehavior {
 
 	// Use this for initialization
 	void Start () {
-		controller         = Object.FindObjectOfType<GameSystem.GameController>();
+		controller         = Object.FindObjectOfType<GameController>();
 		parameter          = new SlayerParameter();
 		state              = new SlayerStateMachine();
 		characterAnimation = gameObject.GetComponent<SlayerAnimation>();

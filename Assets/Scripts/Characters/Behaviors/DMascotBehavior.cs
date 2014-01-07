@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using CharacterInterface;
+using GameSystem.GameController;
 
 public class DMascotBehavior : CharacterBehavior {
 
 	void Awake() {
 		parameter = new DMascotParameter();
-		controller = Object.FindObjectOfType<GameSystem.GameController>();
+		controller = Object.FindObjectOfType<GameController>();
 	}
 	
 	void OnGUI() {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GameSystem;
+using GameSystem.GameController;
 using StateMachine;
 using CharacterInterface;
 

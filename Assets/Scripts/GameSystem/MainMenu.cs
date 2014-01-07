@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/* Server Initialize and Connect to Server Script */
+/* MainMenu Script
+ * functions 
+ * - Server Initialize and Connect to MasterServer
+ */
 
-public class NetworkClient : MonoBehaviour {
+public class MainMenu : MonoBehaviour {
 	
 	/* master server settings */
 	public const string masterServerIP   = "127.0.0.1";

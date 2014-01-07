@@ -84,7 +84,7 @@ GameObject:
   - 4: {fileID: 818101761}
   - 114: {fileID: 818101760}
   m_Layer: 0
-  m_Name: NetworkClient
+  m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,10 +98,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 818101759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45a288c0add1421ca64fabc6c0f8cec, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e7336224884a4dfa9c1e89c3a19092f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameComment: sorry, room comment is not implemented.
 --- !u!4 &818101761
 Transform:
   m_ObjectHideFlags: 0

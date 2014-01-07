@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
 using CharacterInterface;
+using System.Collections;
 
 namespace Skill {
-	namespace Slayer {
+	namespace Slayer { 
 
-		public class ShotBehavior : MonoBehaviour {
+		public class SlayerMeleeBehavior : MonoBehaviour {
 
 			public GameObject hitEffect;
-			public int        shotDurationFrame = 120;
-			public int        shotDamageValue   = 10;
+			const float meleePower       = 10000.0f;
+			const int   meleeDamageValue = 50;
 
 			// Use this for initialization
 			void Start () {
@@ -18,16 +18,15 @@ namespace Skill {
 
 			// Update is called once per frame
 			void Update () {
-				shotDurationFrame--;
-				if (shotDurationFrame == 0) Destroy(gameObject);
-
+				Destroy(gameObject);	// melee is 1 frame
 			}
 
 			void OnCollisionEnter(Collision collision) {
-				Instantiate(hitEffect, transform.position, Quaternion.identity);
+				Vector3 melee_vector = (collision.transform.position - transform.position);
+				collision.gameObject.rigidbody.AddForce(meleePower * melee_vector);
 
 				DamageInfo info = new DamageInfo();
-				info.SetDamageValue(shotDamageValue);
+				info.SetDamageValue(meleeDamageValue);
 
 				MonoBehaviour[] behaviors =  collision.gameObject.GetComponents<MonoBehaviour>();
 				foreach (MonoBehaviour b in behaviors) {
@@ -35,6 +34,7 @@ namespace Skill {
 					if (i != null) 	i.Damage(info);
 				}
 
+				Instantiate(hitEffect, transform.position, Quaternion.identity);
 				Destroy(gameObject);
 			}
 		}

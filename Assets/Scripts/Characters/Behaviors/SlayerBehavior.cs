@@ -6,8 +6,8 @@ using GameSystem.GameController;
 
 public class SlayerBehavior : CharacterBehavior {
 	
-	public Rigidbody  slayerShot;
-	public GameObject slayerPunch;
+	public Rigidbody  slayerShoot;
+	public GameObject slayerMelee;
 
 	// Use this for initialization
 	void Start () {
@@ -46,13 +46,13 @@ public class SlayerBehavior : CharacterBehavior {
 			state.TryTransform(CharacterState.JumpStart);
 		}
 
-		// Shot Action
+		// Shoot Action
 		if (Input.GetKeyUp(KeyCode.X)) {
 			state.TryTransform(CharacterState.AttackStartShoot);
 			state.TryTransform(CharacterState.AttackRunShoot);
 		}
 
-		// Punch Action
+		// Melee Action
 		if (Input.GetKeyUp(KeyCode.Z)) {
 			state.TryTransform(CharacterState.AttackStartMelee);
 		}
@@ -241,7 +241,7 @@ public class SlayerBehavior : CharacterBehavior {
 	void spawnShoot(Vector3 position, Vector3 forward) {
 		Vector3 spawnPoint = position + forward + new Vector3(0, 1, 0);
 		
-		Rigidbody shot         = Instantiate(slayerShot, spawnPoint, Quaternion.identity) as Rigidbody;
+		Rigidbody shot         = Instantiate(slayerShoot, spawnPoint, Quaternion.identity) as Rigidbody;
 		shot.velocity          = forward * 10;
 		shot.transform.forward = forward;
 	}
@@ -249,6 +249,6 @@ public class SlayerBehavior : CharacterBehavior {
 	[RPC]
 	void spawnMelee(Vector3 position, Vector3 forward) {
 		Vector3 spawnPoint = position + forward;
-		Instantiate(slayerPunch, spawnPoint, Quaternion.identity);
+		Instantiate(slayerMelee, spawnPoint, Quaternion.identity);
 	}
 }

@@ -6,9 +6,14 @@ using GameSystem.SettingDefinition;
 namespace GameSystem {
 
 	public class GlobalSettings	{
+		/* definitions */
+		private const Character kDefaultCharacter = Character.Slayer;
+
+		/* singleton */
 		private static GlobalSettings setting = new GlobalSettings();
 
 		private GlobalSettings () {
+			character = kDefaultCharacter;
 		}
 
 		public static GlobalSettings Setting {

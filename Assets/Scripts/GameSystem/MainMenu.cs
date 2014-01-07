@@ -23,11 +23,14 @@ public class MainMenu : MonoBehaviour {
 	/* menus */
 	private Rect networkMenu;
 	private Rect serverListMenu;
+	private Rect settingMenu;
 	private const int networkMenuID    = 0;
 	private const int serverListMenuID = 1;
+	private const int settingMenuID    = 2;
 	
 	/* const variables */
-	private const string loadTargetLevelName = "NetworkTestField";
+	private const string kLoadTargetLevelName       = "NetworkTestField";
+	private const string kCharacterSettingLevelName = "CharacterSetting";
 	
 	
 	/* debug inforamation */
@@ -96,6 +99,13 @@ public class MainMenu : MonoBehaviour {
 			GUILayout.EndHorizontal();
 		}
 	}
+
+	private void makeSettingMenu(int id) {
+		/* TODO: show character status in main manu */
+		if (GUILayout.Button("edit")) {
+			Application.LoadLevel(kCharacterSettingLevelName);
+		}
+	}
 	
 	/* utils */
 	
@@ -110,6 +120,7 @@ public class MainMenu : MonoBehaviour {
 		/* initialize variables */
 		networkMenu    = new Rect(Screen.width - 220, 0, 200, 50);
 		serverListMenu = new Rect(0, 70, Screen.width, 100);
+		settingMenu    = new Rect(20, 0, 200, 50);
 		
 		MasterServer.ipAddress = masterServerIP;
 		MasterServer.port      = masterServerPort;
@@ -121,6 +132,7 @@ public class MainMenu : MonoBehaviour {
 		if (Network.peerType == NetworkPeerType.Disconnected && MasterServer.PollHostList ().Length != 0) {
 			serverListMenu = GUILayout.Window(serverListMenuID, serverListMenu, makeServerListMenu, "server list");
 		}
+		settingMenu = GUILayout.Window(settingMenuID, settingMenu, makeSettingMenu, "Character Settings");
 	}
 	
 	/* network callbacks */
@@ -128,13 +140,13 @@ public class MainMenu : MonoBehaviour {
 	void OnConnectedToServer() {
 		// client side : for only two user room
 		Debug.Log("connected server on client");
-		Application.LoadLevel(loadTargetLevelName);
+		Application.LoadLevel(kLoadTargetLevelName);
 	}
 	
  	void OnPlayerConnected() {
 		// server side : for only two user room
 		Debug.Log("Detect client connection");
-		Application.LoadLevel(loadTargetLevelName);
+		Application.LoadLevel(kLoadTargetLevelName);
 
 	}
 }

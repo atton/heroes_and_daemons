@@ -1,24 +1,27 @@
 using System;
-using SettingDefinition;
+using GameSystem.SettingDefinition;
 
 /* global settings singleton */
 
-public class GlobalSettings	{
-	private static GlobalSettings setting = new GlobalSettings();
+namespace GameSystem {
 
-	private GlobalSettings () {
-	}
+	public class GlobalSettings	{
+		private static GlobalSettings setting = new GlobalSettings();
 
-	public static GlobalSettings Setting {
-		get { return setting; }
-	}
+		private GlobalSettings () {
+		}
 
-	/* variables */
-	private Character character;
+		public static GlobalSettings Setting {
+			get { return setting; }
+		}
 
-	/* getter setter */
-	public Character Character {
-		set { this.character = value; }
-		get { return this.character; }
+		/* variables */
+		private Character character;
+
+		/* getter setter */
+		public Character Character {
+			set { this.character = value; }
+			get { return this.character; }
+		}
 	}
 }

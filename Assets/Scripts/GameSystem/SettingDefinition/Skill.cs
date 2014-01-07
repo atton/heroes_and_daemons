@@ -2,10 +2,14 @@ using System;
 
 namespace GameSystem {
 	namespace SettingDefinition {
-		public enum Character {
+		public enum Skill {
 			None = 0,
-			DMascot,
-			Slayer
+			Barrier,
+			Burst,
+			Dash,
+			Melee,
+			Shoot,
+			Throw
 		}
 	}
 }

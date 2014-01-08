@@ -5,7 +5,7 @@ using GameSystem.SettingDefinition;
 
 namespace GameSystem {
 
-	public class GlobalSettings	{
+	public class GlobalSettings {
 		/* definitions */
 		private const Character kDefaultCharacter = Character.Slayer;
 

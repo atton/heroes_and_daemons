@@ -40,8 +40,8 @@ public class CharacterSetting : MonoBehaviour {
 	}
 
 	void makeCharacterSelectMenu(int id) {
-		if (GUILayout.Button("Slayer"))  GlobalSettings.Setting.Character = Character.Slayer;
-		if (GUILayout.Button("DMascot")) GlobalSettings.Setting.Character = Character.DMascot;
+		if (GUILayout.Button("Slayer")) GlobalSettings.Setting.Character = Character.Slayer;
+		if (GUILayout.Button("Golem"))  GlobalSettings.Setting.Character = Character.Golem;
 	}
 		
 }

@@ -5,7 +5,8 @@ namespace GameSystem {
 		public enum Character {
 			None = 0,
 			DMascot,
-			Slayer
+			Slayer,
+			Golem
 		}
 	}
 }

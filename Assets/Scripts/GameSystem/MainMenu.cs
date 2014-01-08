@@ -121,7 +121,7 @@ public class MainMenu : MonoBehaviour {
 		networkMenu    = new Rect(Screen.width - 220, 0, 200, 50);
 		serverListMenu = new Rect(0, 70, Screen.width, 100);
 		settingMenu    = new Rect(20, 0, 200, 50);
-		
+
 		MasterServer.ipAddress = masterServerIP;
 		MasterServer.port      = masterServerPort;
 		MasterServer.dedicatedServer = true;	// count host user in number to room joined user

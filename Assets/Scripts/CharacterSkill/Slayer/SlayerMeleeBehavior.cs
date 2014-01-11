@@ -2,7 +2,7 @@
 using CharacterInterface;
 using System.Collections;
 
-namespace Skill.Slayer {
+namespace CharacterSkill.Slayer {
 
 	public class SlayerMeleeBehavior : MonoBehaviour {
 

@@ -58,20 +58,24 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 	}
 
 	/* utils for inherited class */
+	
+	protected bool TryTransfromFromSkill(Skill s) {
+		bool successedTransfrom = false;
 
-	protected void TryTransfromFromSkill(Skill s) {
 		switch (s) {
 		case Skill.Melee:
-			state.TryTransform(CharacterState.AttackStartMelee);
+			successedTransfrom |= state.TryTransform(CharacterState.AttackStartMelee);
 			break;
 		case Skill.Shoot:
-			state.TryTransform(CharacterState.AttackStartShoot);
-			state.TryTransform(CharacterState.AttackRunShoot);
+			successedTransfrom |= state.TryTransform(CharacterState.AttackStartShoot);
+			successedTransfrom |= state.TryTransform(CharacterState.AttackRunShoot);
 			break;
 
 		default:
 			throw new UnityException("Undefined Transform for skill : " + s.ToString());
 		}
+
+		return successedTransfrom;
 	}
 
 	/* getter setter */

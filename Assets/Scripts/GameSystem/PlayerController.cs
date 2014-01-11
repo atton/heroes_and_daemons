@@ -11,11 +11,23 @@ namespace GameSystem {
 
 		/* cool down frames */
 
-		private int coolDownFrameSkillA;
-		private int coolDownFrameSkillB;
-		private int coolDownFrameSkillC;
+		private int neededCoolDownFrameSkillA;
+		private int neededCoolDownFrameSkillB;
+		private int neededCoolDownFrameSkillC;
+
+		private int coolingFrameSkillA;
+		private int coolingFrameSkillB;
+		private int coolingFrameSkillC;
+
 
 		public PlayerController () {
+			neededCoolDownFrameSkillA = GlobalSettings.Setting.GetCoolDownFrameSkillA();
+			neededCoolDownFrameSkillB = GlobalSettings.Setting.GetCoolDownFrameSkillB();
+			neededCoolDownFrameSkillC = GlobalSettings.Setting.GetCoolDownFrameSkillC();
+
+			coolingFrameSkillA = neededCoolDownFrameSkillA;
+			coolingFrameSkillB = neededCoolDownFrameSkillB;
+			coolingFrameSkillC = neededCoolDownFrameSkillC;
 		}
 
 		/* return CharacterControll from Inputs */
@@ -23,6 +35,11 @@ namespace GameSystem {
 			float   upOrDown    = Input.GetAxis("Horizontal");
 			float   rightOrLeft = Input.GetAxis("Vertical");
 			Vector3 moveVector  = new Vector3(-rightOrLeft, 0, upOrDown);
+
+			Debug.Log ("SkillA : " + coolingFrameSkillA.ToString() + " / " + neededCoolDownFrameSkillA.ToString());
+			Debug.Log ("SkillB : " + coolingFrameSkillB.ToString() + " / " + neededCoolDownFrameSkillB.ToString());
+			Debug.Log ("SkillB : " + coolingFrameSkillB.ToString() + " / " + neededCoolDownFrameSkillC.ToString());
+
 			return moveVector;
 		}
 
@@ -30,18 +47,28 @@ namespace GameSystem {
 			return Input.GetKeyUp(KeyJump);
 		}
 
-		/* TODO: calculate cooldown for skills */
-
 		public bool IsWantToUseSkillA() {
-			return Input.GetKeyUp(KeySkillA);
+			return (neededCoolDownFrameSkillA <= coolingFrameSkillA++) && Input.GetKeyUp(KeySkillA);
 		}
 		
 		public bool IsWantToUseSkillB() {
-			return Input.GetKeyUp(KeySkillB);
+			return (neededCoolDownFrameSkillB <= coolingFrameSkillB++) && Input.GetKeyUp(KeySkillB);
 		}
 		
 		public bool IsWantToUseSkillC() {
-			return Input.GetKeyUp(KeySkillC);
+			return (neededCoolDownFrameSkillC <= coolingFrameSkillC++) && Input.GetKeyUp(KeySkillC);
+		}
+
+		public void UsedSkillA() {
+			coolingFrameSkillA = 0;
+		}
+
+		public void UsedSkillB() {
+			coolingFrameSkillB = 0;
+		}
+		
+		public void UsedSkillC() {
+			coolingFrameSkillC = 0;
 		}
 	}
 }

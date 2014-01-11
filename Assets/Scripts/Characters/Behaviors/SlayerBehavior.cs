@@ -41,9 +41,18 @@ public class SlayerBehavior : CharacterBehavior {
 		}
 
 		// Skills
-		if (playerController.IsWantToUseSkillA()) TryTransfromFromSkill(GlobalSettings.Setting.SkillA);
-		if (playerController.IsWantToUseSkillB()) TryTransfromFromSkill(GlobalSettings.Setting.SkillB);
-		if (playerController.IsWantToUseSkillC()) TryTransfromFromSkill(GlobalSettings.Setting.SkillC);
+		if (playerController.IsWantToUseSkillA()) {
+			bool successedTransform = TryTransfromFromSkill(GlobalSettings.Setting.SkillA);
+			if (successedTransform) playerController.UsedSkillA();
+		}
+		if (playerController.IsWantToUseSkillB()) {
+			bool successedTransfrom = TryTransfromFromSkill(GlobalSettings.Setting.SkillB);
+			if (successedTransfrom) playerController.UsedSkillB();
+		}
+		if (playerController.IsWantToUseSkillC()){
+			bool successedTransfrom = TryTransfromFromSkill(GlobalSettings.Setting.SkillC);
+			if (successedTransfrom) playerController.UsedSkillC();
+		}
 	}
 
 	void ActionFromState() {

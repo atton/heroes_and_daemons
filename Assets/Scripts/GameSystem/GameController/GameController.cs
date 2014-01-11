@@ -19,10 +19,6 @@ namespace GameSystem.GameController {
 		protected CharacterBehavior playerCharacter;
 		private PlayerController playerController = new PlayerController();
 
-		protected virtual void Update() {
-			playerController.Update(playerCharacter);
-		}
-
 		/* GameController methods */
 
 		protected virtual GameObject PlayerPrefabFromSetting() {

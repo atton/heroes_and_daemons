@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GameSystem;
 using GameSystem.GameController;
+using GameSystem.SettingDefinition;
 using StateMachine;
 using CharacterInterface;
 
 public class CharacterBehavior : MonoBehaviour, IDamage {
 
-	protected GameController controller;
+	protected GameController   gameController;
+	protected PlayerController playerController;
 
 	protected CharacterStateMachine state;
 	protected CharacterAnimation    characterAnimation;
@@ -18,7 +21,8 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 	protected float zRange = 20.0f;
 
 	protected virtual void Awake() {
-		controller         = Object.FindObjectOfType<GameController>();
+		gameController     = Object.FindObjectOfType<GameController>();
+		playerController   = new PlayerController();
 		enabled            = networkView.isMine;
 		if (enabled) focusCamera();
 	}
@@ -41,6 +45,8 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 		parameter.Damage(info);
 	}
 
+	/* public methods */	
+
 	public virtual void focusCamera() {
 		GameObject mainCamera = GameObject.Find("Main Camera");
 		Component[] components = mainCamera.GetComponents<MonoBehaviour>();
@@ -51,9 +57,26 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 		}
 	}
 
+	/* utils for inherited class */
+
+	protected void TryTransfromFromSkill(Skill s) {
+		switch (s) {
+		case Skill.Melee:
+			state.TryTransform(CharacterState.AttackStartMelee);
+			break;
+		case Skill.Shoot:
+			state.TryTransform(CharacterState.AttackStartShoot);
+			state.TryTransform(CharacterState.AttackRunShoot);
+			break;
+
+		default:
+			throw new UnityException("Undefined Transform for skill : " + s.ToString());
+		}
+	}
+
 	/* getter setter */
 	public GameController Controller {
-		get { return this.controller; }
-		set { this.controller = value; }
+		get { return this.gameController; }
+		set { this.gameController = value; }
 	}
 }

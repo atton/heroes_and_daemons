@@ -13,11 +13,7 @@ namespace GameSystem.GameController {
 
 
 		/* network control identifier */
-		protected NetworkPlayer selfNetworkPlayer;
-
-		/* player control */
-		protected CharacterBehavior playerCharacter;
-		private PlayerController playerController = new PlayerController();
+		protected NetworkPlayer SelfNetworkPlayer;
 
 		/* GameController methods */
 
@@ -47,9 +43,6 @@ namespace GameSystem.GameController {
 			} else {
 				obj = Instantiate(prefab, position, rotation) as GameObject;
 			}
-			CharacterBehavior character = obj.GetComponent<CharacterBehavior>();
-			playerCharacter             = character;
-
 			return obj;
 		}
 

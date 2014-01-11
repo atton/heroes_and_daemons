@@ -24,7 +24,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 		gameController     = Object.FindObjectOfType<GameController>();
 		playerController   = new PlayerController();
 		enabled            = networkView.isMine;
-		if (enabled) focusCamera();
+		if (enabled) FocusCamera();
 	}
 
 
@@ -47,7 +47,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 
 	/* public methods */	
 
-	public virtual void focusCamera() {
+	public virtual void FocusCamera() {
 		GameObject mainCamera = GameObject.Find("Main Camera");
 		Component[] components = mainCamera.GetComponents<MonoBehaviour>();
 		

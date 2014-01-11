@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using GameSystem;
 using GameSystem.SettingDefinition;
@@ -28,7 +29,7 @@ public class CharacterSetting : MonoBehaviour {
 		                              Screen.width - kRectSpace*2, kRectHeight);
 
 		/* bottom */
-		exitMenu            = new Rect(kRectSpace, Screen.height - (kRectSpace + kRectHeight),
+		exitMenu            = new Rect(kRectSpace, Screen.height - (kRectSpace*2 + kRectHeight),
 		                               Screen.width - kRectSpace*2, kRectHeight);
 	}
 
@@ -43,9 +44,20 @@ public class CharacterSetting : MonoBehaviour {
 	/* methods for create menu */
 
 	void makeExitMenu(int id) {
-		if (GUILayout.Button("exit")) Application.LoadLevel(kMainMenuName);
+		GUILayout.BeginHorizontal();
 
 		GUILayout.Label("Selected Character : " + GlobalSettings.Setting.Character.ToString());
+
+		GUILayout.BeginVertical();
+		GUILayout.Label("Selected SkillA    : " + GlobalSettings.Setting.SkillA.ToString());
+		GUILayout.Label("Selected SkillB    : " + GlobalSettings.Setting.SkillB.ToString());
+		GUILayout.Label("Selected SkillC    : " + GlobalSettings.Setting.SkillC.ToString());
+		GUILayout.EndVertical();
+
+		GUILayout.EndHorizontal();
+
+		if (GUILayout.Button("exit")) Application.LoadLevel(kMainMenuName);
+
 	}
 
 	void makeCharacterSelectMenu(int id) {
@@ -58,7 +70,33 @@ public class CharacterSetting : MonoBehaviour {
 	}
 
 	void makeSkilSelectMenu(int id) {
-		if (GUILayout.Button("skill")) throw new UnityException("skill select is unimplemented.");
+		Skill selectedSkillA           = selectSkillFromButtons("SkillA");
+		selectedSkillA                 = (selectedSkillA == Skill.None) ? GlobalSettings.Setting.SkillA : selectedSkillA;
+		GlobalSettings.Setting.SkillA  = selectedSkillA;
+
+		Skill selectedSkillB           = selectSkillFromButtons("SkillB");
+		selectedSkillB                 = (selectedSkillB == Skill.None) ? GlobalSettings.Setting.SkillB : selectedSkillB;
+		GlobalSettings.Setting.SkillB  = selectedSkillB;
+		
+		Skill selectedSkillC           = selectSkillFromButtons("SkillC");
+		selectedSkillC                 = (selectedSkillC == Skill.None) ? GlobalSettings.Setting.SkillC : selectedSkillC;
+		GlobalSettings.Setting.SkillC  = selectedSkillC;
+	}
+
+	/* helpers */
+	private Skill selectSkillFromButtons(string skillLabel) {
+		GUILayout.BeginHorizontal();
+
+		GUILayout.Label(skillLabel + " : ");
+
+		foreach (Skill s in Enum.GetValues(typeof(Skill))) {
+			if (s == Skill.None) continue;
+			if (GUILayout.Button(s.ToString())) return s;
+		}
+
+
+		GUILayout.EndHorizontal();
+		return Skill.None;
 	}
 		
 }

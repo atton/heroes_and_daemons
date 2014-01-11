@@ -5,7 +5,7 @@ using GameSystem.GameController;
 
 public class DMascotBehavior : CharacterBehavior {
 
-	void Awake() {
+	override protected void Awake() {
 		parameter = new DMascotParameter();
 		controller = Object.FindObjectOfType<GameController>();
 	}

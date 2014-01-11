@@ -13,14 +13,7 @@ namespace GameSystem.GameController {
 
 		// Use this for initialization
 		void Start () {
-			GameObject obj = Instantiate(spawnPrefab, spawnPoint, spawnRotation) as GameObject;
-			CharacterBehavior character = obj.GetComponent<CharacterBehavior>();
-			character.Controller = this;
-		}
-
-		// Update is called once per frame
-		void Update () {
-
+			CharacterInstantiate(spawnPrefab, spawnPoint, spawnRotation);
 		}
 
 		public override void NoticeKnockoutPlayer (NetworkPlayer pl) {

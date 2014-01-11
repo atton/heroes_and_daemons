@@ -17,6 +17,12 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 	protected float xRange = 3.0f;
 	protected float zRange = 20.0f;
 
+	protected virtual void Awake() {
+		controller         = Object.FindObjectOfType<GameController>();
+		enabled            = networkView.isMine;
+		if (enabled) focusCamera();
+	}
+
 
 	protected virtual void Update() {
 		positionControl();

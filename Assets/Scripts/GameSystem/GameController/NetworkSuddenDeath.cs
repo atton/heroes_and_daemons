@@ -14,7 +14,7 @@ namespace GameSystem.GameController {
 		}
 
 		void CreateNewPlayerCharacter(GameObject targetPrefab) {
-			GameObject obj = Network.Instantiate(targetPrefab, initPosition, initRotation, 1) as GameObject;
+			GameObject obj = CharacterInstantiate(targetPrefab, initPosition, initRotation);
 			int playerId = System.Int32.Parse(obj.networkView.owner.ToString());
 			obj.transform.position += new Vector3(0.0f, 0.0f, playerId*3);
 			if (obj.networkView.isMine) selfNetworkPlayer = obj.networkView.owner;

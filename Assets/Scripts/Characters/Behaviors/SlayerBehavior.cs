@@ -10,14 +10,11 @@ public class SlayerBehavior : CharacterBehavior {
 	public GameObject slayerMelee;
 
 	// Use this for initialization
-	void Start () {
-		controller         = Object.FindObjectOfType<GameController>();
+	override protected void Awake () {
 		parameter          = new SlayerParameter();
 		state              = new SlayerStateMachine();
 		characterAnimation = gameObject.GetComponent<SlayerAnimation>();
-		enabled            = networkView.isMine;
-
-		if (enabled) focusCamera();
+		base.Awake();
 	}
 	
 	// Update is called once per frame

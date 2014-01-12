@@ -27,6 +27,9 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 		if (enabled) FocusCamera();
 	}
 
+	protected virtual void OnGUI() {
+		playerController.OnGUI();
+	}
 
 	protected virtual void Update() {
 		positionControl();

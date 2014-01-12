@@ -33,7 +33,7 @@ namespace GameSystem {
 			inclementCoolFrameAllSkills();
 		}
 
-		/* helper methods */
+		/* character control helper methods */
 		private void moveFromInput(IControllable character) {
 			float   upOrDown    = Input.GetAxis("Horizontal");
 			float   rightOrLeft = Input.GetAxis("Vertical");
@@ -58,5 +58,30 @@ namespace GameSystem {
 			skillC.InclementCoolingFrame();
 		}
 
+		/* public methods */
+
+		/* show skill status */
+		private const int kSpace = 25;
+		public void OnGUI() {
+
+			GUI.Label(new Rect(kSpace , Screen.height - kSpace*3, Screen.width - kSpace*2, kSpace),
+			          "SkillA : " + labelFromSkillControl(skillA));
+			GUI.Label(new Rect(kSpace , Screen.height - kSpace*2, Screen.width - kSpace*2, kSpace),
+			          "SkillB : " + labelFromSkillControl(skillB));
+			GUI.Label(new Rect(kSpace , Screen.height - kSpace*1, Screen.width - kSpace*2, kSpace),
+			          "SkillC : " + labelFromSkillControl(skillC));
+		}
+
+		private string labelFromSkillControl(SkillControl skillControl) {
+			string str = "";
+
+			str += skillControl.Skill.ToString();
+			str += " ";
+			str += skillControl.CoolingSkillFrame.ToString();
+			str += "/";
+			str += skillControl.NeedCoolFrame;
+
+			return str;
+		}
 	}
 }

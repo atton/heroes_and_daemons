@@ -34,6 +34,14 @@ namespace CharacterSkill {
 		public Skill Skill {
 			get { return this.skill; }
 		}
+
+		public int CoolingSkillFrame {
+			get { return this.coolingSkillFrame; }
+		}
+
+		public int NeedCoolFrame {
+			get { return this.needCoolFrame; }
+		}
 	}
 
 }

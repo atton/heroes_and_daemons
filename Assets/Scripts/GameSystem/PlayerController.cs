@@ -48,7 +48,7 @@ namespace GameSystem {
 
 		private void useSkillFromInput(IControllable character, SkillControl skillControll, KeyCode skillKey) {
 			if (skillControll.IsSkillAvailable() && Input.GetKeyUp(skillKey)) {
-				if (character.UseSkill(skillControll.Skill)) skillControll.Used();
+				if (character.UseSkill(skillControll.Skill)) skillControll.SkillUsed();
 			}
 		}
 

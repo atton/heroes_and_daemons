@@ -10,7 +10,6 @@ namespace GameSystem.GameController {
 
 		void Awake() {
 			CreateNewPlayerCharacter(PlayerPrefabFromSetting());
-
 		}
 
 		void CreateNewPlayerCharacter(GameObject targetPrefab) {
@@ -19,7 +18,6 @@ namespace GameSystem.GameController {
 			obj.transform.position += new Vector3(0.0f, 0.0f, playerId*3);
 			if (obj.networkView.isMine) SelfNetworkPlayer = obj.networkView.owner;
 		}
-
 
 		void OnPlayerDisconnected(NetworkPlayer pl) {
 			Network.DestroyPlayerObjects(pl);

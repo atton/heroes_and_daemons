@@ -28,7 +28,7 @@ public class CharacterParameter : IDamage {
 			return CoolDownFrameMelee;
 		
 		default:
-				throw new UnityEngine.UnityException("Undefined cool down frame for : " + s.ToString());
+			throw new UnityEngine.UnityException("Undefined cool down frame for : " + s.ToString());
 		}
 	}
 

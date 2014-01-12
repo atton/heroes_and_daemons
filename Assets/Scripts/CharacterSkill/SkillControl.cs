@@ -15,7 +15,7 @@ namespace CharacterSkill {
 			needCoolFrame     = characterParameter.GetCoolDownFrameFromSkill(s);
 			coolingSkillFrame = needCoolFrame;
 			skill             = s;
-			}
+		}
 
 		/* public methods */
 		public void InclementCoolingFrame() {
@@ -26,7 +26,7 @@ namespace CharacterSkill {
 			return coolingSkillFrame == needCoolFrame;
 		}
 
-		public void Used() {
+		public void SkillUsed() {
 			coolingSkillFrame = 0;
 		}
 

@@ -32,7 +32,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 		positionControl();
 	}
 
-	void positionControl() {
+	private void positionControl() {
 		Vector3 pos = transform.position;
 
 		pos.x = Mathf.Clamp(pos.x, -xRange, xRange);
@@ -50,7 +50,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 	public virtual void FocusCamera() {
 		GameObject mainCamera = GameObject.Find("Main Camera");
 		Component[] components = mainCamera.GetComponents<MonoBehaviour>();
-		
+
 		foreach (Component c in components) {
 			Cameracontrol control = c as Cameracontrol;
 			if (control != null) control.player = gameObject;

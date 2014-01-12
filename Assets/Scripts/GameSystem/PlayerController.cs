@@ -35,6 +35,9 @@ namespace GameSystem {
 		public void UpdateCharacterFromInput(IControllable character) {
 			moveFromInput(character);
 			jumpFromInput(character);
+			useSkillAFromInput(character);
+			useSkillBFromInput(character);
+			useSkillCFromInput(character);
 		}
 
 		/* helper methods */
@@ -43,11 +46,11 @@ namespace GameSystem {
 			float   rightOrLeft = Input.GetAxis("Vertical");
 			Vector3 moveVector  = new Vector3(-rightOrLeft, 0, upOrDown);
 
-			/*
+
 			Debug.Log ("SkillA : " + coolingFrameSkillA.ToString() + " / " + neededCoolDownFrameSkillA.ToString());
 			Debug.Log ("SkillB : " + coolingFrameSkillB.ToString() + " / " + neededCoolDownFrameSkillB.ToString());
-			Debug.Log ("SkillB : " + coolingFrameSkillB.ToString() + " / " + neededCoolDownFrameSkillC.ToString());
-			*/
+			Debug.Log ("SkillC : " + coolingFrameSkillC.ToString() + " / " + neededCoolDownFrameSkillC.ToString());
+
 			character.Move(moveVector);
 		}
 
@@ -55,28 +58,25 @@ namespace GameSystem {
 			if (Input.GetKeyUp(KeyJump)) character.Jump();
 		}
 
-		public bool IsWantToUseSkillA() {
-			return (neededCoolDownFrameSkillA <= coolingFrameSkillA++) && Input.GetKeyUp(KeySkillA);
-		}
-		
-		public bool IsWantToUseSkillB() {
-			return (neededCoolDownFrameSkillB <= coolingFrameSkillB++) && Input.GetKeyUp(KeySkillB);
-		}
-		
-		public bool IsWantToUseSkillC() {
-			return (neededCoolDownFrameSkillC <= coolingFrameSkillC++) && Input.GetKeyUp(KeySkillC);
-		}
+		private void useSkillAFromInput(IControllable character) {
+			if (coolingFrameSkillA++ <= neededCoolDownFrameSkillA) return;
+			if (!Input.GetKeyUp(KeySkillA)) return;
 
-		public void UsedSkillA() {
-			coolingFrameSkillA = 0;
-		}
-
-		public void UsedSkillB() {
-			coolingFrameSkillB = 0;
+			if (character.UseSkill(GlobalSettings.Setting.SkillA)) coolingFrameSkillA = 0;
 		}
 		
-		public void UsedSkillC() {
-			coolingFrameSkillC = 0;
+		private void useSkillBFromInput(IControllable character) {
+			if (coolingFrameSkillB++ <= neededCoolDownFrameSkillB) return;
+			if (!Input.GetKeyUp(KeySkillB)) return;
+
+			if (character.UseSkill(GlobalSettings.Setting.SkillB)) coolingFrameSkillB = 0;
+		}
+		
+		private void useSkillCFromInput(IControllable character) {
+			if (coolingFrameSkillC++ <= neededCoolDownFrameSkillC) return;
+			if (!Input.GetKeyUp(KeySkillC)) return;
+
+			if (character.UseSkill(GlobalSettings.Setting.SkillC)) coolingFrameSkillC = 0;
 		}
 	}
 }

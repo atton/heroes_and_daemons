@@ -60,11 +60,15 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 	/* IControllable methods */
 
 	public virtual void Move(Vector3 moveVector) {
-		throw new UnityEngine.UnityException("UnImplementd Move method. please override it.");
+		throw new UnityEngine.UnityException("UnImplemented Move method. please override it.");
 	}
 
 	public virtual void Jump() {
-		throw new UnityEngine.UnityException("UnImplementd Jump method. please override it.");
+		throw new UnityEngine.UnityException("UnImplemented Jump method. please override it.");
+	}
+
+	public virtual bool UseSkill(Skill s) {
+		throw new UnityEngine.UnityException("UnImplemented UseSkill method. please override it.");
 	}
 
 	/* utils for inherited class */

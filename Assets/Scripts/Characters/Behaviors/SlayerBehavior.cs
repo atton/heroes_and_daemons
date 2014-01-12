@@ -3,6 +3,7 @@ using System.Collections;
 using StateMachine;
 using CharacterInterface;
 using GameSystem;
+using GameSystem.SettingDefinition;
 using GameSystem.GameController;
 
 public class SlayerBehavior : CharacterBehavior {
@@ -21,26 +22,9 @@ public class SlayerBehavior : CharacterBehavior {
 	// Update is called once per frame
 	override protected void Update () {
 		playerController.UpdateCharacterFromInput(this);
-		UpdateStateFromInput();
 		state.UpdateFrameCount();
 		ActionFromState();
 		base.Update();
-	}
-
-	void UpdateStateFromInput() {
-		// Skills
-		if (playerController.IsWantToUseSkillA()) {
-			bool successedTransform = TryTransfromFromSkill(GlobalSettings.Setting.SkillA);
-			if (successedTransform) playerController.UsedSkillA();
-		}
-		if (playerController.IsWantToUseSkillB()) {
-			bool successedTransfrom = TryTransfromFromSkill(GlobalSettings.Setting.SkillB);
-			if (successedTransfrom) playerController.UsedSkillB();
-		}
-		if (playerController.IsWantToUseSkillC()){
-			bool successedTransfrom = TryTransfromFromSkill(GlobalSettings.Setting.SkillC);
-			if (successedTransfrom) playerController.UsedSkillC();
-		}
 	}
 
 	/* IControllable methods */
@@ -53,6 +37,10 @@ public class SlayerBehavior : CharacterBehavior {
 
 	public override void Jump() {
 		state.TryTransform(CharacterState.JumpStart);
+	}
+
+	public override bool UseSkill(Skill s) {
+		return TryTransfromFromSkill(s);
 	}
 
 	/* Actions */

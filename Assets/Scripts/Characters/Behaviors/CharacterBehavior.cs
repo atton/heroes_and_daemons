@@ -6,7 +6,7 @@ using GameSystem.SettingDefinition;
 using StateMachine;
 using CharacterInterface;
 
-public class CharacterBehavior : MonoBehaviour, IDamage {
+public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 
 	protected GameController   gameController;
 	protected PlayerController playerController;
@@ -55,6 +55,12 @@ public class CharacterBehavior : MonoBehaviour, IDamage {
 			Cameracontrol control = c as Cameracontrol;
 			if (control != null) control.player = gameObject;
 		}
+	}
+
+	/* IControllable methods */
+
+	public virtual void Move(Vector3 moveVector) {
+		throw new UnityEngine.UnityException("UnImplementd Move method. please override it.");
 	}
 
 	/* utils for inherited class */

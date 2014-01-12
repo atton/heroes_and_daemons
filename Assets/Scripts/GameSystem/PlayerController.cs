@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using CharacterInterface;
 
 namespace GameSystem {
 	public class PlayerController {
@@ -30,17 +31,23 @@ namespace GameSystem {
 			coolingFrameSkillC = neededCoolDownFrameSkillC;
 		}
 
-		/* return CharacterControll from Inputs */
-		public Vector3 GetMoveVectorFromInput() {
+		/* character control method */
+		public void UpdateCharacterFromInput(IControllable character) {
+			moveFromInput(character);
+		}
+
+		/* helper methods */
+		private void moveFromInput(IControllable character) {
 			float   upOrDown    = Input.GetAxis("Horizontal");
 			float   rightOrLeft = Input.GetAxis("Vertical");
 			Vector3 moveVector  = new Vector3(-rightOrLeft, 0, upOrDown);
 
+			/*
 			Debug.Log ("SkillA : " + coolingFrameSkillA.ToString() + " / " + neededCoolDownFrameSkillA.ToString());
 			Debug.Log ("SkillB : " + coolingFrameSkillB.ToString() + " / " + neededCoolDownFrameSkillB.ToString());
 			Debug.Log ("SkillB : " + coolingFrameSkillB.ToString() + " / " + neededCoolDownFrameSkillC.ToString());
-
-			return moveVector;
+			*/
+			character.Move(moveVector);
 		}
 
 		public bool IsPressedJumpKey() {

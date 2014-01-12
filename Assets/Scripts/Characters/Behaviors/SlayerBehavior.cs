@@ -20,6 +20,7 @@ public class SlayerBehavior : CharacterBehavior {
 	
 	// Update is called once per frame
 	override protected void Update () {
+		playerController.UpdateCharacterFromInput(this);
 		UpdateStateFromInput();
 		state.UpdateFrameCount();
 		ActionFromState();
@@ -27,13 +28,6 @@ public class SlayerBehavior : CharacterBehavior {
 	}
 
 	void UpdateStateFromInput() {
-		Vector3 moveVector = playerController.GetMoveVectorFromInput();
-
-		// move. support only Run state
-		if ((moveVector != Vector3.zero)) {
-			state.TryTransform(CharacterState.Run);
-			move(moveVector);
-		}
 
 		// jump
 		if (playerController.IsPressedJumpKey()) {
@@ -54,6 +48,16 @@ public class SlayerBehavior : CharacterBehavior {
 			if (successedTransfrom) playerController.UsedSkillC();
 		}
 	}
+
+	/* IControllable methods */
+	public override void Move (Vector3 moveVector) {
+		if (moveVector == Vector3.zero) return;
+		state.TryTransform(CharacterState.Run);
+		move(moveVector);
+
+	}
+
+	/* Actions */
 
 	void ActionFromState() {
 		CharacterState cs = state.NowState();
@@ -112,7 +116,7 @@ public class SlayerBehavior : CharacterBehavior {
 		}
 	}
 
-	/* Actions */
+	/* Action Details */
 
 	void StandAction(int frameCount) {
 		if (transform.position.y > 0) state.TryTransform(CharacterState.Aerial);

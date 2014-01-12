@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using CharacterInterface;
+using CharacterSkill;
 
 namespace GameSystem {
 	public class PlayerController {
@@ -12,32 +13,26 @@ namespace GameSystem {
 
 		/* cool down frames */
 
-		private int neededCoolDownFrameSkillA;
-		private int neededCoolDownFrameSkillB;
-		private int neededCoolDownFrameSkillC;
-
-		private int coolingFrameSkillA;
-		private int coolingFrameSkillB;
-		private int coolingFrameSkillC;
-
+		private SkillControl skillA;
+		private SkillControl skillB;
+		private SkillControl skillC;
 
 		public PlayerController () {
-			neededCoolDownFrameSkillA = GlobalSettings.Setting.GetCoolDownFrameSkillA();
-			neededCoolDownFrameSkillB = GlobalSettings.Setting.GetCoolDownFrameSkillB();
-			neededCoolDownFrameSkillC = GlobalSettings.Setting.GetCoolDownFrameSkillC();
+			skillA = new SkillControl(null, GlobalSettings.Setting.SkillA);
+			skillB = new SkillControl(null, GlobalSettings.Setting.SkillB);
+			skillC = new SkillControl(null, GlobalSettings.Setting.SkillC);
 
-			coolingFrameSkillA = neededCoolDownFrameSkillA;
-			coolingFrameSkillB = neededCoolDownFrameSkillB;
-			coolingFrameSkillC = neededCoolDownFrameSkillC;
 		}
 
 		/* character control method */
 		public void UpdateCharacterFromInput(IControllable character) {
 			moveFromInput(character);
 			jumpFromInput(character);
-			useSkillAFromInput(character);
-			useSkillBFromInput(character);
-			useSkillCFromInput(character);
+
+			useSkillFromInput(character, skillA, KeySkillA);
+			useSkillFromInput(character, skillB, KeySkillB);
+			useSkillFromInput(character, skillC, KeySkillC);
+			inclementCoolFrameAllSkills();
 		}
 
 		/* helper methods */
@@ -46,11 +41,6 @@ namespace GameSystem {
 			float   rightOrLeft = Input.GetAxis("Vertical");
 			Vector3 moveVector  = new Vector3(-rightOrLeft, 0, upOrDown);
 
-
-			Debug.Log ("SkillA : " + coolingFrameSkillA.ToString() + " / " + neededCoolDownFrameSkillA.ToString());
-			Debug.Log ("SkillB : " + coolingFrameSkillB.ToString() + " / " + neededCoolDownFrameSkillB.ToString());
-			Debug.Log ("SkillC : " + coolingFrameSkillC.ToString() + " / " + neededCoolDownFrameSkillC.ToString());
-
 			character.Move(moveVector);
 		}
 
@@ -58,25 +48,17 @@ namespace GameSystem {
 			if (Input.GetKeyUp(KeyJump)) character.Jump();
 		}
 
-		private void useSkillAFromInput(IControllable character) {
-			if (coolingFrameSkillA++ <= neededCoolDownFrameSkillA) return;
-			if (!Input.GetKeyUp(KeySkillA)) return;
-
-			if (character.UseSkill(GlobalSettings.Setting.SkillA)) coolingFrameSkillA = 0;
+		private void useSkillFromInput(IControllable character, SkillControl skillControll, KeyCode skillKey) {
+			if (skillControll.IsSkillAvailable() && Input.GetKeyUp(skillKey)) {
+				if (character.UseSkill(skillControll.Skill)) skillControll.Used();
+			}
 		}
-		
-		private void useSkillBFromInput(IControllable character) {
-			if (coolingFrameSkillB++ <= neededCoolDownFrameSkillB) return;
-			if (!Input.GetKeyUp(KeySkillB)) return;
 
-			if (character.UseSkill(GlobalSettings.Setting.SkillB)) coolingFrameSkillB = 0;
+		private void inclementCoolFrameAllSkills() {
+			skillA.InclementCoolingFrame();
+			skillB.InclementCoolingFrame();
+			skillC.InclementCoolingFrame();
 		}
-		
-		private void useSkillCFromInput(IControllable character) {
-			if (coolingFrameSkillC++ <= neededCoolDownFrameSkillC) return;
-			if (!Input.GetKeyUp(KeySkillC)) return;
 
-			if (character.UseSkill(GlobalSettings.Setting.SkillC)) coolingFrameSkillC = 0;
-		}
 	}
 }

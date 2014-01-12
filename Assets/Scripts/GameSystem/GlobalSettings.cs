@@ -27,16 +27,8 @@ namespace GameSystem {
 		}
 
 		/* public methods */
-		public int GetCoolDownFrameSkillA() {
-			return GetCoolDownFrame(skillA);
-		}
-
-		public int GetCoolDownFrameSkillB() {
-			return GetCoolDownFrame(skillB);
-		}
-		
-		public int GetCoolDownFrameSkillC() {
-			return GetCoolDownFrame(skillC);
+		public int GetCoolDownFrameSkill(Skill s) {
+			return GetCoolDownFrame(s);
 		}
 
 		/* helpers */

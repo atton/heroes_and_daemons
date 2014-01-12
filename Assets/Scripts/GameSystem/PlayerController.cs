@@ -11,17 +11,15 @@ namespace GameSystem {
 		private const KeyCode KeySkillC = KeyCode.C;
 		private const KeyCode KeyJump   = KeyCode.Space;
 
-		/* cool down frames */
-
+		/* Skills */
 		private SkillControl skillA;
 		private SkillControl skillB;
 		private SkillControl skillC;
 
-		public PlayerController () {
-			skillA = new SkillControl(null, GlobalSettings.Setting.SkillA);
-			skillB = new SkillControl(null, GlobalSettings.Setting.SkillB);
-			skillC = new SkillControl(null, GlobalSettings.Setting.SkillC);
-
+		public PlayerController(CharacterParameter characterParameter) {
+			skillA = new SkillControl(characterParameter, GlobalSettings.Setting.SkillA);
+			skillB = new SkillControl(characterParameter, GlobalSettings.Setting.SkillB);
+			skillC = new SkillControl(characterParameter, GlobalSettings.Setting.SkillC);
 		}
 
 		/* character control method */

@@ -22,7 +22,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 
 	protected virtual void Awake() {
 		gameController     = Object.FindObjectOfType<GameController>();
-		playerController   = new PlayerController();
+		playerController   = new PlayerController(parameter);
 		enabled            = networkView.isMine;
 		if (enabled) FocusCamera();
 	}

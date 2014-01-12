@@ -26,30 +26,6 @@ namespace GameSystem {
 			get { return setting; }
 		}
 
-		/* public methods */
-		public int GetCoolDownFrameSkill(Skill s) {
-			return GetCoolDownFrame(s);
-		}
-
-		/* helpers */
-
-		/* FIXME : please delete CharacterParameter Instance */
-		private CharacterParameter characterParameter;
-		private int GetCoolDownFrame(Skill s) {
-			if (characterParameter == null) {
-				switch (character) {
-				case Character.Slayer:
-					characterParameter = new SlayerParameter();
-					break;
-
-				default:
-					throw new UnityEngine.UnityException("Undefined Character Parameter for : " + character.ToString());
-				}
-			}
-			return characterParameter.GetCoolDownFrameFromSkill(s);
-		}
-
-
 		/* variables */
 		private Character character;
 		private Skill     skillA;

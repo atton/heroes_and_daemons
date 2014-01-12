@@ -11,8 +11,8 @@ namespace CharacterSkill {
 
 		private Skill skill;
 
-		public SkillControl(CharacterParameter param, Skill s) {
-			needCoolFrame     = GlobalSettings.Setting.GetCoolDownFrameSkill(s);// FIXME : use param.
+		public SkillControl(CharacterParameter characterParameter, Skill s) {
+			needCoolFrame     = characterParameter.GetCoolDownFrameFromSkill(s);
 			coolingSkillFrame = needCoolFrame;
 			skill             = s;
 			}

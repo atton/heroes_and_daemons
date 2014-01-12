@@ -7,6 +7,7 @@ namespace CharacterInterface {
 
 	public interface IControllable {
 		void Move(Vector3 moveVector);
+		void Jump();
 	}
 
 }

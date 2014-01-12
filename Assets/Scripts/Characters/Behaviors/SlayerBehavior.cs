@@ -28,12 +28,6 @@ public class SlayerBehavior : CharacterBehavior {
 	}
 
 	void UpdateStateFromInput() {
-
-		// jump
-		if (playerController.IsPressedJumpKey()) {
-			state.TryTransform(CharacterState.JumpStart);
-		}
-
 		// Skills
 		if (playerController.IsWantToUseSkillA()) {
 			bool successedTransform = TryTransfromFromSkill(GlobalSettings.Setting.SkillA);
@@ -50,11 +44,15 @@ public class SlayerBehavior : CharacterBehavior {
 	}
 
 	/* IControllable methods */
-	public override void Move (Vector3 moveVector) {
+	public override void Move(Vector3 moveVector) {
 		if (moveVector == Vector3.zero) return;
 		state.TryTransform(CharacterState.Run);
 		move(moveVector);
 
+	}
+
+	public override void Jump() {
+		state.TryTransform(CharacterState.JumpStart);
 	}
 
 	/* Actions */

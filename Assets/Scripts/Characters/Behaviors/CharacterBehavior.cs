@@ -63,6 +63,10 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 		throw new UnityEngine.UnityException("UnImplementd Move method. please override it.");
 	}
 
+	public virtual void Jump() {
+		throw new UnityEngine.UnityException("UnImplementd Jump method. please override it.");
+	}
+
 	/* utils for inherited class */
 	
 	protected bool TryTransfromFromSkill(Skill s) {

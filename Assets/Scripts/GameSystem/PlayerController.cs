@@ -34,6 +34,7 @@ namespace GameSystem {
 		/* character control method */
 		public void UpdateCharacterFromInput(IControllable character) {
 			moveFromInput(character);
+			jumpFromInput(character);
 		}
 
 		/* helper methods */
@@ -50,8 +51,8 @@ namespace GameSystem {
 			character.Move(moveVector);
 		}
 
-		public bool IsPressedJumpKey() {
-			return Input.GetKeyUp(KeyJump);
+		private void jumpFromInput(IControllable character) {
+			if (Input.GetKeyUp(KeyJump)) character.Jump();
 		}
 
 		public bool IsWantToUseSkillA() {

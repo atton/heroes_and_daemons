@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlayerPrefab: {fileID: 100042, guid: 9838fe7b253314bbe9501bed22b09dba, type: 2}
-  GolemPrefab: {fileID: 100004, guid: 74d4b9ad4f36248d1ba60f364cdca7f5, type: 2}
+  GolemPrefab: {fileID: 100032, guid: 2b021bf5f3a694277837250aff199388, type: 2}
 --- !u!4 &1959418110
 Transform:
   m_ObjectHideFlags: 0

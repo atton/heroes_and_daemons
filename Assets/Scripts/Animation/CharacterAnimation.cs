@@ -15,7 +15,7 @@ public class CharacterAnimation : MonoBehaviour {
 		sentState = (CharacterState)(-3);
 		preState  = (CharacterState)(-2);
 		nowState  = (CharacterState)(-1);
-		
+
 	}
 
 	protected void PlayAnimation(string animationName) {

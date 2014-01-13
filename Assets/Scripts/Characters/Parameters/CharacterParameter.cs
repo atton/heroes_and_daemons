@@ -26,7 +26,7 @@ public class CharacterParameter : IDamage {
 
 		case Skill.Melee:
 			return CoolDownFrameMelee;
-		
+
 		default:
 			throw new UnityEngine.UnityException("Undefined cool down frame for : " + s.ToString());
 		}

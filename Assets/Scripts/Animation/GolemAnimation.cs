@@ -2,10 +2,10 @@ using UnityEngine;
 using System;
 using StateMachine;
 
-public class SlayerAnimation : CharacterAnimation {
+public class GolemAnimation : CharacterAnimation {
 
 	public void Awake() {
-		animation["stand"].wrapMode = WrapMode.Loop;
+		animation["Stand"].wrapMode = WrapMode.Loop;
 		animation["run"].wrapMode   = WrapMode.Loop;
 	}
 
@@ -14,7 +14,7 @@ public class SlayerAnimation : CharacterAnimation {
 		switch (cs) {
 
 		case CharacterState.Stand:
-			PlayAnimation("stand");
+			PlayAnimation("Stand");
 			break;
 
 		case CharacterState.JumpStart:
@@ -52,10 +52,6 @@ public class SlayerAnimation : CharacterAnimation {
 
 		case CharacterState.AttackingShoot:
 			PlayAnimation("attackingshoot");
-			break;
-
-		case CharacterState.AttackRunShoot:
-			PlayAnimation("attackrunshoot");
 			break;
 
 		default:

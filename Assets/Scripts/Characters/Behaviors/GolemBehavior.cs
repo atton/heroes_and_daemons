@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using StateMachine;
 using CharacterInterface;
@@ -6,20 +6,18 @@ using GameSystem;
 using GameSystem.SettingDefinition;
 using GameSystem.GameController;
 
-public class SlayerBehavior : CharacterBehavior {
+public class GolemBehavior : CharacterBehavior {
 
-	public Rigidbody  slayerShoot;
-	public GameObject slayerMelee;
+	public Rigidbody  golemShoot;
+	public GameObject golemMelee;
 
-	// Use this for initialization
 	override protected void Awake () {
-		parameter          = new SlayerParameter();
-		state              = new SlayerStateMachine();
-		characterAnimation = gameObject.GetComponent<SlayerAnimation>();
+		parameter          = new GolemParameter();
+		state              = new GolemStateMachine();
+		characterAnimation = gameObject.GetComponent<GolemAnimation>();
 		base.Awake();
 	}
 
-	// Update is called once per frame
 	override protected void Update () {
 		playerController.UpdateCharacterFromInput(this);
 		state.UpdateFrameCount();
@@ -83,10 +81,6 @@ public class SlayerBehavior : CharacterBehavior {
 
 		case CharacterState.AttackingShoot:
 			AttackingShootAction(frameCount);
-			break;
-
-		case CharacterState.AttackRunShoot:
-			AttackRunShootAction(frameCount);
 			break;
 
 		case CharacterState.AttackStartMelee:
@@ -159,15 +153,6 @@ public class SlayerBehavior : CharacterBehavior {
 		}
 	}
 
-	void AttackRunShootAction(int frameCount) {
-		if (frameCount == 0) {
-			shoot();
-		}
-		if (characterAnimation.IsFinishedNowAnimation()) {
-			state.EndNowState();
-		}
-	}
-
 	/* Action Helpers */
 
 	void move(Vector3 moveVector) {
@@ -176,7 +161,7 @@ public class SlayerBehavior : CharacterBehavior {
 		Vector3 runVector = parameter.RunSpeed * moveVector;
 
 		rigidbody.AddForce(runVector);
-	 	transform.rotation = Quaternion.LookRotation(moveVector);
+		transform.rotation = Quaternion.LookRotation(moveVector);
 	}
 
 	void shoot() {
@@ -224,7 +209,7 @@ public class SlayerBehavior : CharacterBehavior {
 	void spawnShoot(Vector3 position, Vector3 forward) {
 		Vector3 spawnPoint = position + forward + new Vector3(0, 1, 0);
 
-		Rigidbody shot         = Instantiate(slayerShoot, spawnPoint, Quaternion.identity) as Rigidbody;
+		Rigidbody shot         = Instantiate(golemShoot, spawnPoint, Quaternion.identity) as Rigidbody;
 		shot.velocity          = forward * 10;
 		shot.transform.forward = forward;
 	}
@@ -232,6 +217,6 @@ public class SlayerBehavior : CharacterBehavior {
 	[RPC]
 	void spawnMelee(Vector3 position, Vector3 forward) {
 		Vector3 spawnPoint = position + forward;
-		Instantiate(slayerMelee, spawnPoint, Quaternion.identity);
+		Instantiate(golemMelee, spawnPoint, Quaternion.identity);
 	}
 }

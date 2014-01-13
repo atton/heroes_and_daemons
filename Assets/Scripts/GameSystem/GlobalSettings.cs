@@ -47,7 +47,7 @@ namespace GameSystem {
 			set { this.skillB = value; }
 			get { return this.skillB; }
 		}
-		
+
 		public Skill SkillC {
 			set { this.skillC = value; }
 			get { return this.skillC; }

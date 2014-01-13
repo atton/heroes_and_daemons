@@ -1,8 +1,7 @@
 using System;
-namespace StateMachine
-{
-	public class SlayerStateMachine : CharacterStateMachine	{
-		public SlayerStateMachine() : base(CharacterState.Stand) {
+namespace StateMachine {
+	public class GolemStateMachine : CharacterStateMachine {
+		public GolemStateMachine() : base(CharacterState.Stand) {
 			SetTransformCondition(CharacterState.Stand, CharacterState.Run);
 			SetTransformCondition(CharacterState.Stand, CharacterState.Hurt);
 			SetTransformCondition(CharacterState.Stand, CharacterState.JumpStart);
@@ -14,7 +13,6 @@ namespace StateMachine
 			SetTransformCondition(CharacterState.Stand, CharacterState.AttackStartShoot);
 			SetTransformCondition(CharacterState.Stand, CharacterState.AttackStartThrow);
 
-			SetTransformCondition(CharacterState.Run, CharacterState.AttackRunShoot);
 			SetTransformCondition(CharacterState.Run, CharacterState.AttackStartMelee);
 			SetTransformCondition(CharacterState.Run, CharacterState.Hurt);
 

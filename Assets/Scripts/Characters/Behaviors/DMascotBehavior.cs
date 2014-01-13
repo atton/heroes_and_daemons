@@ -9,7 +9,7 @@ public class DMascotBehavior : CharacterBehavior {
 		parameter = new DMascotParameter();
 		gameController = Object.FindObjectOfType<GameController>();
 	}
-	
+
 	override protected void OnGUI() {
 		string hitPointStr = parameter.HitPoint.ToString() + "/" + parameter.MaxHitPoint.ToString();
 		GUI.Label(new Rect(20, 20, 100, 20), hitPointStr);	// show HP on left top

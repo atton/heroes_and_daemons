@@ -40,15 +40,15 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 
 		pos.x = Mathf.Clamp(pos.x, -xRange, xRange);
 		pos.z = Mathf.Clamp(pos.z, -zRange, zRange);
-		
+
 		transform.position = pos;
 	}
-	
+
 	public virtual void Damage(DamageInfo info) {
 		parameter.Damage(info);
 	}
 
-	/* public methods */	
+	/* public methods */
 
 	public virtual void FocusCamera() {
 		GameObject mainCamera = GameObject.Find("Main Camera");
@@ -75,7 +75,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 	}
 
 	/* utils for inherited class */
-	
+
 	protected bool TryTransfromFromSkill(Skill s) {
 		bool successedTransfrom = false;
 

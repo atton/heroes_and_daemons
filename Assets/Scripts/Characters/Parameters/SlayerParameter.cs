@@ -2,7 +2,6 @@ using System;
 using CharacterInterface;
 
 public class SlayerParameter : CharacterParameter {
-	
 
 	public SlayerParameter() {
 		hitPoint           = MaxHitPoint;
@@ -11,7 +10,7 @@ public class SlayerParameter : CharacterParameter {
 		CoolDownFrameShoot = 100;
 		CoolDownFrameMelee = 150;
 	}
-	
+
 	public override void Damage(DamageInfo info)	{
 		hitPoint -= info.DamageValue();
 	}

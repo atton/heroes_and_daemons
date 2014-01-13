@@ -6,6 +6,8 @@ public class CharacterParameter : IDamage {
 	/* parameters */
 	protected int maxHitPoint;
 	protected int hitPoint;
+	protected int superArmerDamageLimit;
+
 
 	protected float runSpeed;
 
@@ -36,9 +38,13 @@ public class CharacterParameter : IDamage {
 	public int MaxHitPoint {
 		get { return this.maxHitPoint; }
 	}
-
+	
 	public int HitPoint {
 		get { return this.hitPoint; }
+	}
+	
+	public int SuperArmerDamageLimit {
+		get { return this.superArmerDamageLimit; }
 	}
 
 	public float RunSpeed {

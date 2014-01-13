@@ -187,8 +187,10 @@ public class GolemBehavior : CharacterBehavior {
 		Debug.LogError("hit : id = " + networkView.owner.ToString() + ", HP = " + parameter.HitPoint);
 		// TODO : show HP parameters
 
-		// TODO : check hurt condition if required. this implement is force hurt in Damage.
-		state.TryTransform(CharacterState.Hurt);
+		if (parameter.SuperArmerDamageLimit <= info.DamageValue()) {
+			// golem has super armer
+			state.TryTransform(CharacterState.Hurt);
+		}
 
 		if (parameter.HitPoint <= 0) {
 			gameController.NoticeKnockoutPlayer(networkView.owner);

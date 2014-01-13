@@ -4,12 +4,105 @@ ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Armature
+    100004: Bone
+    100006: Bone_001
+    100008: Bone_002
+    100010: Bone_003
+    100012: Bone_004
+    100014: cheast
+    100016: cloth1_L
+    100018: cloth1_R
+    100020: cloth2_L
+    100022: cloth2_R
+    100024: cloth3_L
+    100026: cloth3_R
+    100028: Cube
+    100030: fingers_L
+    100032: fingers_R
+    100034: foot1_L
+    100036: foot1_R
+    100038: foot2_L
+    100040: foot2_R
+    100042: footcontrol_L
+    100044: footcontrol_R
+    100046: hand1_L
+    100048: hand1_R
+    100050: hand2_L
+    100052: hand2_R
+    100054: hand3_L
+    100056: hand3_R
+    100058: hand4_L
+    100060: hand4_R
+    100062: head
+    100064: Hero
+    100066: leg1_L
+    100068: leg1_R
+    100070: leg2_L
+    100072: leg2_R
+    100074: leg3_L
+    100076: leg3_R
+    100078: neck
+    100080: spine
+    100082: thumb2_L
+    100084: thumb2_R
+    100086: tumb1_L
+    100088: tumb1_R
     400000: //RootNode
+    400002: Armature
+    400004: Bone
+    400006: Bone_001
+    400008: Bone_002
+    400010: Bone_003
+    400012: Bone_004
+    400014: cheast
+    400016: cloth1_L
+    400018: cloth1_R
+    400020: cloth2_L
+    400022: cloth2_R
+    400024: cloth3_L
+    400026: cloth3_R
+    400028: Cube
+    400030: fingers_L
+    400032: fingers_R
+    400034: foot1_L
+    400036: foot1_R
+    400038: foot2_L
+    400040: foot2_R
+    400042: footcontrol_L
+    400044: footcontrol_R
+    400046: hand1_L
+    400048: hand1_R
+    400050: hand2_L
+    400052: hand2_R
+    400054: hand3_L
+    400056: hand3_R
+    400058: hand4_L
+    400060: hand4_R
+    400062: head
+    400064: Hero
+    400066: leg1_L
+    400068: leg1_R
+    400070: leg2_L
+    400072: leg2_R
+    400074: leg3_L
+    400076: leg3_R
+    400078: neck
+    400080: spine
+    400082: thumb2_L
+    400084: thumb2_R
+    400086: tumb1_L
+    400088: tumb1_R
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cube
     7400000: Default Take
+    7400002: hurt
+    7400004: jump
+    7400006: run
+    7400008: stand
     9500000: //RootNode
+    13700000: Cube
   materials:
     importMaterials: 1
     materialName: 0

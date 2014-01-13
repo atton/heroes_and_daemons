@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b253c7878cdf7487a9511d3e4c4f0c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  golemShoot: {fileID: 0}
+  golemShoot: {fileID: 5400000, guid: 74d4b9ad4f36248d1ba60f364cdca7f5, type: 2}
   golemMelee: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:

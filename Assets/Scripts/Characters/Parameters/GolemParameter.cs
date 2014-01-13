@@ -6,7 +6,7 @@ public class GolemParameter : CharacterParameter {
 	public GolemParameter() {
 		hitPoint           = MaxHitPoint;
 		maxHitPoint        = 200;
-		runSpeed           = 5.0f;
+		runSpeed           = 50.0f;
 		CoolDownFrameShoot = 300;
 		CoolDownFrameMelee = 450;
 	}

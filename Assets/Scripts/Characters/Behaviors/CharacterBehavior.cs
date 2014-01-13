@@ -17,8 +17,8 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 	protected CharacterParameter    parameter;
 
 	/* TODO : this parameters split into field parameters class */
-	protected float xRange = 3.0f;
-	protected float zRange = 20.0f;
+	protected float xRange = 6.0f;
+	protected float zRange = 40.0f;
 
 	protected virtual void Awake() {
 		gameController     = Object.FindObjectOfType<GameController>();

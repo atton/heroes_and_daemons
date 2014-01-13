@@ -141,7 +141,6 @@ public class SlayerBehavior : CharacterBehavior {
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) {
 			state.EndNowState(); 
-			// Please Add Skill cooling
 		}
 	}
 
@@ -157,7 +156,6 @@ public class SlayerBehavior : CharacterBehavior {
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) {
 			state.EndNowState(); 
-			// Please Add Skill cooling
 		}
 	}
 	
@@ -167,7 +165,6 @@ public class SlayerBehavior : CharacterBehavior {
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) {
 			state.EndNowState(); 
-			// Please Add Skill cooling
 		}
 	}
 	

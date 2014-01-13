@@ -33,6 +33,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 
 	protected virtual void Update() {
 		positionControl();
+		velocityControl();
 	}
 
 	private void positionControl() {
@@ -42,6 +43,15 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 		pos.z = Mathf.Clamp(pos.z, -zRange, zRange);
 
 		transform.position = pos;
+	}
+
+	private void velocityControl() {
+		Vector3 pos = transform.position;
+
+		if ((xRange - Mathf.Abs(pos.x)) < float.Epsilon || 
+		    (zRange - Mathf.Abs(pos.z)) < float.Epsilon) {
+			rigidbody.velocity = Vector3.zero;
+		}
 	}
 
 	public virtual void Damage(DamageInfo info) {

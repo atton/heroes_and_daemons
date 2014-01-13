@@ -209,16 +209,15 @@ public class GolemBehavior : CharacterBehavior {
 	void spawnShoot(Vector3 position, Vector3 forward) {
 		Vector3 spawnPoint = position + forward*3 + new Vector3(0, 2, 0);
 
-		Rigidbody shoot         = Instantiate(golemShoot, spawnPoint, Quaternion.identity) as Rigidbody;
-		shoot.velocity          = forward * 50;
-		shoot.transform.forward = forward;
+		Rigidbody s         = Instantiate(golemShoot, spawnPoint, Quaternion.identity) as Rigidbody;
+		s.velocity          = forward * 50;
+		s.transform.forward = forward;
 	}
 
 	[RPC]
 	void spawnMelee(Vector3 position, Vector3 forward) {
 		Vector3 spawnPoint = position + forward + new Vector3(0, 2, 0);
 		GameObject melee = Instantiate(golemMelee, spawnPoint, Quaternion.identity) as GameObject;
-
 
 		melee.transform.forward = forward;
 	}

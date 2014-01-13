@@ -10,23 +10,22 @@ namespace GameSystem.GameController {
 
 		void Awake() {
 			CreateNewPlayerCharacter(PlayerPrefabFromSetting());
-
 		}
 
 		void CreateNewPlayerCharacter(GameObject targetPrefab) {
-			GameObject obj = Network.Instantiate(targetPrefab, initPosition, initRotation, 1) as GameObject;
+			GameObject obj = CharacterInstantiate(targetPrefab, initPosition, initRotation);
 			int playerId = System.Int32.Parse(obj.networkView.owner.ToString());
 			obj.transform.position += new Vector3(0.0f, 0.0f, playerId*3);
-			if (obj.networkView.isMine) selfNetworkPlayer = obj.networkView.owner;
+			if (obj.networkView.isMine) SelfNetworkPlayer = obj.networkView.owner;
 		}
-
 
 		void OnPlayerDisconnected(NetworkPlayer pl) {
 			Network.DestroyPlayerObjects(pl);
 		}
 
-		public override void NoticeKnockoutPlayer (NetworkPlayer pl) {
-			if (selfNetworkPlayer == pl) {
+		public override void NoticeKnockoutPlayer(NetworkPlayer pl) {
+			/* TODO: show win/lose result */
+			if (SelfNetworkPlayer == pl) {
 				Debug.LogError("You Lose");
 			} else {
 				Debug.LogError("You Win");

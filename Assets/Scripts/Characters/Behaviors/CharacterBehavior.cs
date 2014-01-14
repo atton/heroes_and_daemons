@@ -49,7 +49,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 	private void velocityControl() {
 		Vector3 pos = transform.position;
 
-		if ((xRange - Mathf.Abs(pos.x)) < float.Epsilon || 
+		if ((xRange - Mathf.Abs(pos.x)) < float.Epsilon ||
 		    (zRange - Mathf.Abs(pos.z)) < float.Epsilon) {
 			rigidbody.velocity = Vector3.zero;
 		}

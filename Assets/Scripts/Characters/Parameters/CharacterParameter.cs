@@ -11,7 +11,7 @@ public class CharacterParameter : IDamage {
 	protected int maxHitPoint;
 	protected int hitPoint;
 	protected int superArmerDamageLimit;
-	
+
 	protected float runSpeed;
 
 	/* skill cool down frame */
@@ -43,15 +43,15 @@ public class CharacterParameter : IDamage {
 			throw new UnityEngine.UnityException("Undefined cool down frame for : " + s.ToString());
 		}
 	}
-	
+
 	public void ShowHitPoint() {
 		hitPointStr = "";
 		hitPointStr += character.ToString();
 		hitPointStr += " : ";
 		hitPointStr	+= hitPoint.ToString();
 		hitPointStr += "/";
-		hitPointStr += maxHitPoint.ToString();	
-		
+		hitPointStr += maxHitPoint.ToString();
+
 		GUI.Label(hitPointLabel, hitPointStr);	// show HP on left top
 	}
 
@@ -59,11 +59,11 @@ public class CharacterParameter : IDamage {
 	public int MaxHitPoint {
 		get { return this.maxHitPoint; }
 	}
-	
+
 	public int HitPoint {
 		get { return this.hitPoint; }
 	}
-	
+
 	public int SuperArmerDamageLimit {
 		get { return this.superArmerDamageLimit; }
 	}

@@ -184,8 +184,6 @@ public class GolemBehavior : CharacterBehavior {
 
 	public override void Damage(DamageInfo info) {
 		parameter.Damage(info);
-		Debug.LogError("hit : id = " + networkView.owner.ToString() + ", HP = " + parameter.HitPoint);
-		// TODO : show HP parameters
 
 		if (parameter.SuperArmerDamageLimit <= info.DamageValue()) {
 			// golem has super armer

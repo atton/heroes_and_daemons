@@ -29,6 +29,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 
 	protected virtual void OnGUI() {
 		playerController.OnGUI();
+		parameter.ShowHitPoint();
 	}
 
 	protected virtual void Update() {

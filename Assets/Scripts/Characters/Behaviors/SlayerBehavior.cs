@@ -199,11 +199,7 @@ public class SlayerBehavior : CharacterBehavior {
 
 	public override void Damage(DamageInfo info) {
 		parameter.Damage(info);
-		Debug.LogError("hit : id = " + networkView.owner.ToString() + ", HP = " + parameter.HitPoint);
-		// TODO : show HP parameters
-
-		// TODO : check hurt condition if required. this implement is force hurt in Damage.
-		state.TryTransform(CharacterState.Hurt);
+		state.TryTransform(CharacterState.Hurt);	// slayer not has super armer
 
 		if (parameter.HitPoint <= 0) {
 			gameController.NoticeKnockoutPlayer(networkView.owner);

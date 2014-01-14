@@ -4,7 +4,8 @@ using CharacterInterface;
 public class GolemParameter : CharacterParameter {
 
 	public GolemParameter() {
-		maxHitPoint           = 200;
+		character             = GameSystem.SettingDefinition.Character.Golem;
+		maxHitPoint           = 15000;
 		superArmerDamageLimit = 500;
 		runSpeed              = 15.0f * 3; // mass is 3
 		CoolDownFrameShoot    = 300;

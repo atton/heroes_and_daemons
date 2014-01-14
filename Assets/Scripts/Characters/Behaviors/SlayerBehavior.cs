@@ -2,6 +2,8 @@
 using System.Collections;
 using StateMachine;
 using CharacterInterface;
+using GameSystem;
+using GameSystem.SettingDefinition;
 using GameSystem.GameController;
 
 public class SlayerBehavior : CharacterBehavior {
@@ -10,54 +12,38 @@ public class SlayerBehavior : CharacterBehavior {
 	public GameObject slayerMelee;
 
 	// Use this for initialization
-	void Start () {
-		controller         = Object.FindObjectOfType<GameController>();
+	override protected void Awake () {
 		parameter          = new SlayerParameter();
 		state              = new SlayerStateMachine();
 		characterAnimation = gameObject.GetComponent<SlayerAnimation>();
-		enabled            = networkView.isMine;
-
-		if (enabled) focusCamera();
+		base.Awake();
 	}
 	
 	// Update is called once per frame
 	override protected void Update () {
-		UpdateStateFromInput();
+		playerController.UpdateCharacterFromInput(this);
 		state.UpdateFrameCount();
 		ActionFromState();
 		base.Update();
 	}
 
-	void UpdateStateFromInput() {
-		/* TODO: split this function into character controller class */
-		
-		// input from cursor keys
-		float   up_or_down    = Input.GetAxis("Horizontal");
-		float   right_or_left = Input.GetAxis("Vertical");
-		Vector3 moveVector    = new Vector3(-right_or_left, 0, up_or_down);
+	/* IControllable methods */
+	public override void Move(Vector3 moveVector) {
+		if (moveVector == Vector3.zero) return;
+		state.TryTransform(CharacterState.Run);
+		move(moveVector);
 
-		// Run Action
-		if ((moveVector != Vector3.zero)) {
-			state.TryTransform(CharacterState.Run);
-			move(moveVector);
-		}
-
-		if (Input.GetKeyUp(KeyCode.Space)) {
-			state.TryTransform(CharacterState.JumpStart);
-		}
-
-		// Shoot Action
-		if (Input.GetKeyUp(KeyCode.X)) {
-			state.TryTransform(CharacterState.AttackStartShoot);
-			state.TryTransform(CharacterState.AttackRunShoot);
-		}
-
-		// Melee Action
-		if (Input.GetKeyUp(KeyCode.Z)) {
-			state.TryTransform(CharacterState.AttackStartMelee);
-		}
-		
 	}
+
+	public override void Jump() {
+		state.TryTransform(CharacterState.JumpStart);
+	}
+
+	public override bool UseSkill(Skill s) {
+		return TryTransfromFromSkill(s);
+	}
+
+	/* Actions */
 
 	void ActionFromState() {
 		CharacterState cs = state.NowState();
@@ -112,12 +98,11 @@ public class SlayerBehavior : CharacterBehavior {
 			break;
 		
 		default:
-			Debug.Log("unknown state : " + state.NowState());
-			break;
+			throw new UnityException("unknown state : " + state.NowState());
 		}
 	}
 
-	/* Actions */
+	/* Action Details */
 
 	void StandAction(int frameCount) {
 		if (transform.position.y > 0) state.TryTransform(CharacterState.Aerial);
@@ -191,9 +176,9 @@ public class SlayerBehavior : CharacterBehavior {
 	void move(Vector3 moveVector) {
 		if (state.NowState() != CharacterState.Run) return;
 
-		Vector3 run_vector = parameter.RunSpeed * moveVector;
+		Vector3 runVector = parameter.RunSpeed * moveVector;
 	
-		rigidbody.AddForce(run_vector);
+		rigidbody.AddForce(runVector);
 	 	transform.rotation = Quaternion.LookRotation(moveVector);
 	}
 	
@@ -218,12 +203,13 @@ public class SlayerBehavior : CharacterBehavior {
 	public override void Damage(DamageInfo info) {
 		parameter.Damage(info);
 		Debug.LogError("hit : id = " + networkView.owner.ToString() + ", HP = " + parameter.HitPoint);
+		// TODO : show HP parameters
 
 		// TODO : check hurt condition if required. this implement is force hurt in Damage.
 		state.TryTransform(CharacterState.Hurt);
 
 		if (parameter.HitPoint <= 0) {
-			controller.NoticeKnockoutPlayer(networkView.owner);
+			gameController.NoticeKnockoutPlayer(networkView.owner);
 		}
 	}
 	

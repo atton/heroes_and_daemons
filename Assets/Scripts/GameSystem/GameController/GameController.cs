@@ -11,7 +11,11 @@ namespace GameSystem.GameController {
 		public GameObject SlayerPrefab;
 		public GameObject GolemPrefab;
 
-		protected NetworkPlayer selfNetworkPlayer;
+
+		/* network control identifier */
+		protected NetworkPlayer SelfNetworkPlayer;
+
+		/* GameController methods */
 
 		protected virtual GameObject PlayerPrefabFromSetting() {
 			GameObject prefab;
@@ -30,6 +34,16 @@ namespace GameSystem.GameController {
 			}
 
 			return prefab;
+		}
+
+		protected virtual GameObject CharacterInstantiate(GameObject prefab, Vector3 position, Quaternion rotation) {
+			GameObject obj;
+			if (Network.peerType == NetworkPeerType.Server || Network.peerType == NetworkPeerType.Client) {
+				obj = Network.Instantiate(prefab, position, rotation, 1) as GameObject;
+			} else {
+				obj = Instantiate(prefab, position, rotation) as GameObject;
+			}
+			return obj;
 		}
 
 		public virtual void NoticeKnockoutPlayer(NetworkPlayer pl) {

@@ -59,8 +59,7 @@ public class SlayerAnimation : CharacterAnimation {
 			break;
 
 		default:
-			Debug.Log("Undefined actions to " + cs.ToString());
-			break;
+			throw new UnityException("Undefined actions to " + cs.ToString());
 		}
 
 		base.PlayAnimationFromState(cs);

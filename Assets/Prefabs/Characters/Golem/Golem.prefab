@@ -269,7 +269,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: .706640065, y: .0256875064, z: .7050367, w: -.0540665723}
+  m_LocalRotation: {x: .706640124, y: .0256875083, z: .705036759, w: -.0540665761}
   m_LocalPosition: {x: -.177247107, y: 2.45131542e-08, z: 2.56650312e-10}
   m_LocalScale: {x: 1.00000024, y: 1.00000024, z: 1}
   m_Children: []
@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b253c7878cdf7487a9511d3e4c4f0c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  golemShoot: {fileID: 5400000, guid: 74d4b9ad4f36248d1ba60f364cdca7f5, type: 2}
+  golemShoot: {fileID: 5400000, guid: c5a4e8ea4270d41918e5fe5afd1e3998, type: 2}
   golemMelee: {fileID: 100000, guid: c1aa16efe9dd34cd5ba6910ebfd18c58, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:

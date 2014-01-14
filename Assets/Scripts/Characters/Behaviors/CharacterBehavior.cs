@@ -104,10 +104,4 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 
 		return successedTransfrom;
 	}
-
-	/* getter setter */
-	public GameController Controller {
-		get { return this.gameController; }
-		set { this.gameController = value; }
-	}
 }

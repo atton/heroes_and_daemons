@@ -8,7 +8,7 @@ namespace CharacterSkill.Slayer {
 
 		public GameObject hitEffect;
 		public int        shotDurationFrame = 120;
-		public int        shotDamageValue   = 10;
+		public int        shootDamageValue  = 300;
 
 		// Use this for initialization
 		void Start () {
@@ -26,7 +26,7 @@ namespace CharacterSkill.Slayer {
 			Instantiate(hitEffect, transform.position, Quaternion.identity);
 
 			DamageInfo info = new DamageInfo();
-			info.SetDamageValue(shotDamageValue);
+			info.SetDamageValue(shootDamageValue);
 
 			MonoBehaviour[] behaviors =  collision.gameObject.GetComponents<MonoBehaviour>();
 			foreach (MonoBehaviour b in behaviors) {

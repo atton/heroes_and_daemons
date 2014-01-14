@@ -4,8 +4,8 @@ using CharacterInterface;
 public class SlayerParameter : CharacterParameter {
 
 	public SlayerParameter() {
-		maxHitPoint        = 100;
-		runSpeed           = 20.0f;
+		maxHitPoint        = 5000;
+		runSpeed           = 20.0f * 1; // mass is 1
 		CoolDownFrameShoot = 100;
 		CoolDownFrameMelee = 150;
 

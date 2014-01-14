@@ -4,7 +4,7 @@ using CharacterInterface;
 public class DMascotParameter : CharacterParameter {
 
 	public DMascotParameter() {
-		maxHitPoint = 100;
+		maxHitPoint = 2000;
 		hitPoint    = MaxHitPoint;
 	}
 

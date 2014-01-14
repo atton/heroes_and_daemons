@@ -8,7 +8,7 @@ namespace CharacterSkill.Golem {
 		
 		public GameObject hitEffect;
 		const float meleePower       = 100000.0f;
-		const int   meleeDamageValue = 500;
+		const int   meleeDamageValue = 3000;
 		
 		// Use this for initialization
 		void Start () {

@@ -8,7 +8,7 @@ namespace CharacterSkill.Golem {
 		
 		public GameObject hitEffect;
 		public int        shotDurationFrame = 180;
-		public int        shotDamageValue   = 1000;
+		public int        shotDamageValue   = 1500;
 		
 		// Use this for initialization
 		void Start () {

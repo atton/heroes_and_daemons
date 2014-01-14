@@ -8,7 +8,7 @@ namespace CharacterSkill.Slayer {
 
 		public GameObject hitEffect;
 		const float meleePower       = 10000.0f;
-		const int   meleeDamageValue = 50;
+		const int   meleeDamageValue = 1000;
 
 		// Use this for initialization
 		void Start () {

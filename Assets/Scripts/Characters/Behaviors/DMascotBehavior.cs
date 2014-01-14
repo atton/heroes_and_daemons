@@ -11,8 +11,8 @@ public class DMascotBehavior : CharacterBehavior {
 	}
 
 	override protected void OnGUI() {
-		string hitPointStr = parameter.HitPoint.ToString() + "/" + parameter.MaxHitPoint.ToString();
-		GUI.Label(new Rect(20, 20, 100, 20), hitPointStr);	// show HP on left top
+		string hitPointStr = "DMascot : " + parameter.HitPoint.ToString() + "/" + parameter.MaxHitPoint.ToString();
+		GUI.Label(new Rect(20, 20, 200, 20), hitPointStr);	// show HP on left top
 	}
 
 	void focusCamre() {

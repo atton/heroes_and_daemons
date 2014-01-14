@@ -209,7 +209,7 @@ public class GolemBehavior : CharacterBehavior {
 	/* RPCs */
 	[RPC]
 	void spawnShoot(Vector3 position, Vector3 forward) {
-		Vector3 spawnPoint = position + forward*3 + new Vector3(0, 2, 0);
+		Vector3 spawnPoint = position + forward*5 + new Vector3(0, 2, 0);
 
 		Rigidbody s         = Instantiate(golemShoot, spawnPoint, Quaternion.identity) as Rigidbody;
 		s.velocity          = forward * 50;

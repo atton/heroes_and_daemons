@@ -12,6 +12,8 @@ public class CharacterParameter : IDamage {
 	/* skill cool down frame */
 	protected int CoolDownFrameShoot;
 	protected int CoolDownFrameMelee;
+	protected int CoolDownFrameDash;
+	protected int CoolDownFrameThrow;
 
 	virtual public void Damage(DamageInfo info) {
 		throw new SystemException("CharacterParameter#Damage is virtual. please override it");
@@ -27,6 +29,11 @@ public class CharacterParameter : IDamage {
 		case Skill.Melee:
 			return CoolDownFrameMelee;
 		
+		case Skill.Dash:
+			return CoolDownFrameDash;
+
+		case Skill.Throw:
+			return CoolDownFrameThrow;
 		default:
 			throw new UnityEngine.UnityException("Undefined cool down frame for : " + s.ToString());
 		}

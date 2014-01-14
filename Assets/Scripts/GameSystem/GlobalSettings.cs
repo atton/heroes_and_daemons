@@ -8,9 +8,9 @@ namespace GameSystem {
 	public class GlobalSettings {
 		/* definitions */
 		private const Character kDefaultCharacter = Character.Slayer;
-		private const Skill     kDefaultSkillA    = Skill.Melee;
+		private const Skill     kDefaultSkillA    = Skill.Throw;
 		private const Skill     kDefaultSkillB    = Skill.Shoot;
-		private const Skill     kDefaultSkillC    = Skill.Shoot;
+		private const Skill     kDefaultSkillC    = Skill.Dash;
 
 		/* singleton */
 		private static GlobalSettings setting = new GlobalSettings();

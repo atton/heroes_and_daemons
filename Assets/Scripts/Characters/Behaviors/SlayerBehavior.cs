@@ -9,6 +9,8 @@ using GameSystem.GameController;
 public class SlayerBehavior : CharacterBehavior {
 
 	public Rigidbody  slayerShoot;
+	public Rigidbody  slayerDash;
+	public Rigidbody  slayerThrow;
 	public GameObject slayerMelee;
 
 	// Use this for initialization
@@ -96,6 +98,22 @@ public class SlayerBehavior : CharacterBehavior {
 		case CharacterState.AttackingMelee:
 			AttackingMeleeAction(frameCount);
 			break;
+		
+		case CharacterState.AttackStartDash:
+			AttackStartDashAction(frameCount);
+			break;
+
+		case CharacterState.AttackingDash:
+			AttackingDashAction(frameCount);
+			break;
+
+		case CharacterState.AttackStartThrow:
+			AttackStartThrowAction(frameCount);
+			break;
+
+		case CharacterState.AttackingThrow:
+			AttackingThrowAction(frameCount);
+			break;
 
 		default:
 			throw new UnityException("unknown state : " + state.NowState());
@@ -168,6 +186,33 @@ public class SlayerBehavior : CharacterBehavior {
 		}
 	}
 
+	void AttackStartDashAction(int frameCount) {
+		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.AttackingDash);
+	}
+
+	void AttackingDashAction(int frameCount) {
+		if (frameCount == 0) {
+			dash();
+		}
+
+		if (60 <= frameCount) {
+			state.EndNowState(); 
+		}
+	}
+
+	void AttackStartThrowAction(int frameCount) {
+		if (characterAnimation.IsFinishedNowAnimation()) state.TryTransform(CharacterState.AttackingThrow);
+	}
+	
+	void AttackingThrowAction(int frameCount) {
+		if (frameCount == 0) {
+			throwmagic();
+		}
+		if (characterAnimation.IsFinishedNowAnimation()) {
+			state.EndNowState(); 
+		}
+	}
+
 	/* Action Helpers */
 
 	void move(Vector3 moveVector) {
@@ -178,6 +223,14 @@ public class SlayerBehavior : CharacterBehavior {
 		rigidbody.AddForce(runVector);
 	 	transform.rotation = Quaternion.LookRotation(moveVector);
 	}
+	
+	void dash() {
+		if (Network.peerType == NetworkPeerType.Client || Network.peerType == NetworkPeerType.Server) {
+			networkView.RPC("spawnDash", RPCMode.All, transform.position, transform.forward);
+		} else {
+			spawnDash(transform.position, transform.forward);
+		}
+	}
 
 	void shoot() {
 		if (Network.peerType == NetworkPeerType.Client || Network.peerType == NetworkPeerType.Server) {
@@ -187,7 +240,15 @@ public class SlayerBehavior : CharacterBehavior {
 		}
 	}
 
-	void attackMelee() {
+	void throwmagic() {
+		if (Network.peerType == NetworkPeerType.Client || Network.peerType == NetworkPeerType.Server) {
+			networkView.RPC("spawnThrow", RPCMode.All, transform.position, transform.forward);
+		} else {
+			spawnThrow(transform.position, transform.forward);
+		}
+	}
+
+	void attackMelee() {		
 		if (Network.peerType == NetworkPeerType.Client || Network.peerType == NetworkPeerType.Server) {
 			networkView.RPC("spawnMelee", RPCMode.All, transform.position, transform.forward);
 		} else {
@@ -223,6 +284,26 @@ public class SlayerBehavior : CharacterBehavior {
 		Rigidbody shot         = Instantiate(slayerShoot, spawnPoint, Quaternion.identity) as Rigidbody;
 		shot.velocity          = forward * 10;
 		shot.transform.forward = forward;
+	}
+
+	[RPC]
+	void spawnThrow(Vector3 position, Vector3 forward) {
+		Vector3 spawnPoint     = position + forward + new Vector3(0, 1, 0);
+		Rigidbody throwMagic   = Instantiate(slayerThrow, spawnPoint, Quaternion.identity) as Rigidbody;
+		throwMagic.velocity    = forward * 10 + new Vector3(0, 10, 0);
+		throwMagic.transform.forward = forward;
+	}
+
+	[RPC]
+	void spawnDash(Vector3 position, Vector3 forward) {
+		Vector3 spawnPoint = position + forward  + new Vector3(0, 1, 0);
+		Rigidbody dash     = Instantiate(slayerDash, spawnPoint, Quaternion.identity) as Rigidbody;
+		dash.transform.forward = forward;
+		Vector3          force = forward * 3000;
+		dash.rigidbody.AddForce(force);
+		this.rigidbody.AddForce(force);
+		
+		//Debug.Log(position);
 	}
 
 	[RPC]

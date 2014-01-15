@@ -57,7 +57,21 @@ public class SlayerAnimation : CharacterAnimation {
 		case CharacterState.AttackRunShoot:
 			PlayAnimation("attackrunshoot");
 			break;
+		
+		case CharacterState.AttackStartDash:
+			PlayAnimation("attackstartdash");
+			break;
 
+		case CharacterState.AttackingDash:
+			PlayAnimation("attackingdash");
+			break;
+
+		case CharacterState.AttackStartThrow:
+			PlayAnimation("attackstartthrow");
+			break;
+		case CharacterState.AttackingThrow:
+			PlayAnimation("attackingthrow");
+			break;
 		default:
 			throw new UnityException("Undefined actions to " + cs.ToString());
 		}

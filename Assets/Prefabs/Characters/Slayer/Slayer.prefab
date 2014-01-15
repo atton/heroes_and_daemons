@@ -903,7 +903,7 @@ Animation:
   - {fileID: 7400004, guid: 99c78b8705ae142cb9768ca3a928851e, type: 3}
   - {fileID: 7400006, guid: 99c78b8705ae142cb9768ca3a928851e, type: 3}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &11400000
@@ -918,6 +918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slayerShoot: {fileID: 5400000, guid: 74d4b9ad4f36248d1ba60f364cdca7f5, type: 2}
+  slayerDash: {fileID: 5400000, guid: 6c97bbbe2839a42c58fcdae952faa8ac, type: 2}
+  slayerThrow: {fileID: 5400000, guid: 453e4e6c392be49aeb932384e828297c, type: 2}
   slayerMelee: {fileID: 100000, guid: f1e9f4f441aea459b8c3b42cc24c46b1, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:

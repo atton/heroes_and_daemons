@@ -98,7 +98,12 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 			successedTransfrom |= state.TryTransform(CharacterState.AttackStartShoot);
 			successedTransfrom |= state.TryTransform(CharacterState.AttackRunShoot);
 			break;
-
+		case Skill.Dash:
+			successedTransfrom |= state.TryTransform(CharacterState.AttackStartDash);
+			break;
+		case Skill.Throw:
+			successedTransfrom |= state.TryTransform(CharacterState.AttackStartThrow);
+			break;
 		default:
 			throw new UnityException("Undefined Transform for skill : " + s.ToString());
 		}

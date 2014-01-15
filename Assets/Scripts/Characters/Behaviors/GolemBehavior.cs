@@ -156,7 +156,8 @@ public class GolemBehavior : CharacterBehavior {
 	/* Action Helpers */
 
 	void move(Vector3 moveVector) {
-		if (state.NowState() != CharacterState.Run) return;
+		CharacterState s = state.NowState();
+		if (!(s == CharacterState.Run || s == CharacterState.Aerial)) return;
 
 		Vector3 runVector = parameter.RunSpeed * moveVector;
 

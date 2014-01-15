@@ -4,7 +4,7 @@ namespace CharacterInterface
 	public class DamageInfo {
 
 		int damageValue;
-			
+
 		public DamageInfo() {
 		}
 

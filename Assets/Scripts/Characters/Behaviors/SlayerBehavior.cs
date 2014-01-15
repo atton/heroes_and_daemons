@@ -7,7 +7,7 @@ using GameSystem.SettingDefinition;
 using GameSystem.GameController;
 
 public class SlayerBehavior : CharacterBehavior {
-	
+
 	public Rigidbody  slayerShoot;
 	public Rigidbody  slayerDash;
 	public Rigidbody  slayerThrow;
@@ -20,7 +20,7 @@ public class SlayerBehavior : CharacterBehavior {
 		characterAnimation = gameObject.GetComponent<SlayerAnimation>();
 		base.Awake();
 	}
-	
+
 	// Update is called once per frame
 	override protected void Update () {
 		playerController.UpdateCharacterFromInput(this);
@@ -58,7 +58,7 @@ public class SlayerBehavior : CharacterBehavior {
 		case CharacterState.Stand:
 			StandAction(frameCount);
 			break;
-			
+
 		case CharacterState.Run:
 			RunAction(frameCount);
 			break;
@@ -82,11 +82,11 @@ public class SlayerBehavior : CharacterBehavior {
 		case CharacterState.AttackStartShoot:
 			AttackStartShootAction(frameCount);
 			break;
-		
+
 		case CharacterState.AttackingShoot:
 			AttackingShootAction(frameCount);
 			break;
-		
+
 		case CharacterState.AttackRunShoot:
 			AttackRunShootAction(frameCount);
 			break;
@@ -140,7 +140,7 @@ public class SlayerBehavior : CharacterBehavior {
 	void AerialAction(int frameCount) {
 		if (transform.position.y <= 0) state.EndNowState();
 	}
-	
+
 	void HurtAction(int frameCount) {
 		if (characterAnimation.IsFinishedNowAnimation()) state.EndNowState();
 	}
@@ -158,8 +158,7 @@ public class SlayerBehavior : CharacterBehavior {
 			attackMelee();
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) {
-			state.EndNowState(); 
-			// Please Add Skill cooling
+			state.EndNowState();
 		}
 	}
 
@@ -173,19 +172,17 @@ public class SlayerBehavior : CharacterBehavior {
 		if (frameCount == 0) {
 			shoot();
 		}
-		if (60 <= frameCount) {
-			state.EndNowState(); 
-			// Please Add Skill cooling
+		if (characterAnimation.IsFinishedNowAnimation()) {
+			state.EndNowState();
 		}
 	}
-	
+
 	void AttackRunShootAction(int frameCount) {
 		if (frameCount == 0) {
 			shoot();
 		}
 		if (characterAnimation.IsFinishedNowAnimation()) {
-			state.EndNowState(); 
-			// Please Add Skill cooling
+			state.EndNowState();
 		}
 	}
 
@@ -197,7 +194,8 @@ public class SlayerBehavior : CharacterBehavior {
 		if (frameCount == 0) {
 			dash();
 		}
-		if (characterAnimation.IsFinishedNowAnimation()) {
+
+		if (60 <= frameCount) {
 			state.EndNowState(); 
 		}
 	}
@@ -214,13 +212,14 @@ public class SlayerBehavior : CharacterBehavior {
 			state.EndNowState(); 
 		}
 	}
+
 	/* Action Helpers */
-	
+
 	void move(Vector3 moveVector) {
 		if (state.NowState() != CharacterState.Run) return;
 
 		Vector3 runVector = parameter.RunSpeed * moveVector;
-	
+
 		rigidbody.AddForce(runVector);
 	 	transform.rotation = Quaternion.LookRotation(moveVector);
 	}
@@ -261,19 +260,15 @@ public class SlayerBehavior : CharacterBehavior {
 
 	public override void Damage(DamageInfo info) {
 		parameter.Damage(info);
-		Debug.LogError("hit : id = " + networkView.owner.ToString() + ", HP = " + parameter.HitPoint);
-		// TODO : show HP parameters
-
-		// TODO : check hurt condition if required. this implement is force hurt in Damage.
-		state.TryTransform(CharacterState.Hurt);
+		state.TryTransform(CharacterState.Hurt);	// slayer not has super armer
 
 		if (parameter.HitPoint <= 0) {
 			gameController.NoticeKnockoutPlayer(networkView.owner);
 		}
 	}
-	
+
 	/* utils */
-	
+
 	string GetCurrentAnimationName() {
 		foreach (AnimationState anim in animation) {
 			if (animation.IsPlaying(anim.name)) return anim.name;
@@ -285,7 +280,7 @@ public class SlayerBehavior : CharacterBehavior {
 	[RPC]
 	void spawnShoot(Vector3 position, Vector3 forward) {
 		Vector3 spawnPoint = position + forward + new Vector3(0, 1, 0);
-		
+
 		Rigidbody shot         = Instantiate(slayerShoot, spawnPoint, Quaternion.identity) as Rigidbody;
 		shot.velocity          = forward * 10;
 		shot.transform.forward = forward;
@@ -297,23 +292,23 @@ public class SlayerBehavior : CharacterBehavior {
 		Rigidbody throwMagic   = Instantiate(slayerThrow, spawnPoint, Quaternion.identity) as Rigidbody;
 		throwMagic.velocity    = forward * 10 + new Vector3(0, 10, 0);
 		throwMagic.transform.forward = forward;
+		throwMagic.transform.position += forward;
 	}
 
 	[RPC]
 	void spawnDash(Vector3 position, Vector3 forward) {
-		Vector3 spawnPoint = position + forward  + new Vector3(0, 1, 0);
-		Rigidbody dash     = Instantiate(slayerDash, spawnPoint, Quaternion.identity) as Rigidbody;
-		dash.transform.forward = forward;
-		Vector3          force = forward * 3000;
-		dash.rigidbody.AddForce(force);
-		this.rigidbody.AddForce(force);
-		
-		//Debug.Log(position);
+		Vector3 spawnPoint   = position + forward  + new Vector3(0, 1, 0);
+		Rigidbody dashEffect = Instantiate(slayerDash, spawnPoint, Quaternion.identity) as Rigidbody;
+		dashEffect.transform.forward = forward;
+		dashEffect.transform.position += forward;
+		Vector3  force = forward * 3000;
+		dashEffect.rigidbody.AddForce(force);
+		rigidbody.AddForce(force);
 	}
 
 	[RPC]
 	void spawnMelee(Vector3 position, Vector3 forward) {
-		Vector3 spawnPoint = position + forward;
+		Vector3 spawnPoint = position + forward + new Vector3(0, 1, 0);
 		Instantiate(slayerMelee, spawnPoint, Quaternion.identity);
 	}
 }

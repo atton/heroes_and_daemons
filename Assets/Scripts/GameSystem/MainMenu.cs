@@ -2,24 +2,25 @@
 using System.Collections;
 
 /* MainMenu Script
- * functions 
+ * functions
  * - Server Initialize and Connect to MasterServer
  */
 
 public class MainMenu : MonoBehaviour {
-	
+
 	/* master server settings */
-	public const string masterServerIP   = "127.0.0.1";
-	public const int  masterServerPort   = 23466;
-	public const bool masterServerUseNat = false;
-	
+	public bool   useMyMasterServer          = false;	// manual switch master server. mine or public
+	public const string myMasterServerIP     = "127.0.0.1";
+	public const int    myMasterServerPort   = 23466;
+	public const bool   myMasterServerUseNat = false;
+
 	/* room const values */
 	public const string gameTypeName = "heroes_and_daemons";
 	public const string gameName     = "heroes_and_daemons";
 	public string gameComment        = "sorry, room comment is not implemented.";		// room comment
 	public const int roomUserLimit   = 1;
 	public const int roomPort        = 25002;
-	
+
 	/* menus */
 	private Rect networkMenu;
 	private Rect serverListMenu;
@@ -27,31 +28,31 @@ public class MainMenu : MonoBehaviour {
 	private const int networkMenuID    = 0;
 	private const int serverListMenuID = 1;
 	private const int settingMenuID    = 2;
-	
+
 	/* const variables */
 	private const string kLoadTargetLevelName       = "NetworkTestField";
 	private const string kCharacterSettingLevelName = "CharacterSetting";
-	
-	
+
+
 	/* debug inforamation */
 	void OnFailedToConnectToMasterServer(NetworkConnectionError info) {
 		Debug.Log("OnFailedToConnectToMasterServer : " + info);
 	}
-	
+
 	void OnFailedToConnect(NetworkConnectionError info) {
 		Debug.Log("OnFailedToConnect : " + info);
 	}
-	
+
 	/* window make methods */
 	private void makeNetworkMenu(int id) {
 		GUILayout.Space(10);
-		
+
 		if (Network.peerType == NetworkPeerType.Disconnected) {
             GUILayout.BeginHorizontal();
             GUILayout.Space(10);
 
             if (GUILayout.Button ("Create Room")) {
-                Network.InitializeServer(roomUserLimit, roomPort, masterServerUseNat);
+                Network.InitializeServer(roomUserLimit, roomPort, myMasterServerUseNat);
                 MasterServer.RegisterHost(gameTypeName, gameName, gameComment);
             }
 
@@ -71,27 +72,27 @@ public class MainMenu : MonoBehaviour {
         }
         GUI.DragWindow(new Rect(0, 0, 1000, 1000));
 	}
-	
-	private void makeServerListMenu(int id) {		
+
+	private void makeServerListMenu(int id) {
 		GUILayout.Space(5);
-		
+
 		HostData[] rooms = MasterServer.PollHostList();
-		
+
 		foreach (HostData room in rooms) {
 			GUILayout.BeginHorizontal();
-			
+
 			makeLabelWithSpace(room.gameName);
-			
+
 			string userLabel = room.connectedPlayers + "/" + room.playerLimit;
 			makeLabelWithSpace(userLabel);
 
 			string ipInfo = "";
 			foreach (string ip in room.ip)
 				ipInfo += ip + ":" + room.port + " ";
-			makeLabelWithSpace(ipInfo);	
-			
+			makeLabelWithSpace(ipInfo);
+
 			makeLabelWithSpace(room.comment);
-						
+
 			GUILayout.FlexibleSpace();
 			if (GUILayout.Button("Connect")) {
 				Network.Connect(room);
@@ -106,14 +107,14 @@ public class MainMenu : MonoBehaviour {
 			Application.LoadLevel(kCharacterSettingLevelName);
 		}
 	}
-	
+
 	/* utils */
-	
+
 	private void makeLabelWithSpace(string str) {
 		GUILayout.Label(str);
 		GUILayout.Space(5);
 	}
-		
+
 	/* methods */
 
 	void Awake() {
@@ -122,11 +123,14 @@ public class MainMenu : MonoBehaviour {
 		serverListMenu = new Rect(0, 70, Screen.width, 100);
 		settingMenu    = new Rect(20, 0, 200, 50);
 
-		MasterServer.ipAddress = masterServerIP;
-		MasterServer.port      = masterServerPort;
+		if (useMyMasterServer) {
+			MasterServer.ipAddress = myMasterServerIP;
+			MasterServer.port      = myMasterServerPort;
+		}
+
 		MasterServer.dedicatedServer = true;	// count host user in number to room joined user
 	}
-	
+
 	void OnGUI() {
 		networkMenu = GUILayout.Window(networkMenuID, networkMenu, makeNetworkMenu, "server console");
 		if (Network.peerType == NetworkPeerType.Disconnected && MasterServer.PollHostList ().Length != 0) {
@@ -134,15 +138,15 @@ public class MainMenu : MonoBehaviour {
 		}
 		settingMenu = GUILayout.Window(settingMenuID, settingMenu, makeSettingMenu, "Character Settings");
 	}
-	
+
 	/* network callbacks */
-	
+
 	void OnConnectedToServer() {
 		// client side : for only two user room
 		Debug.Log("connected server on client");
 		Application.LoadLevel(kLoadTargetLevelName);
 	}
-	
+
  	void OnPlayerConnected() {
 		// server side : for only two user room
 		Debug.Log("Detect client connection");

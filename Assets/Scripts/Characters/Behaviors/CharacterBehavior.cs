@@ -17,8 +17,8 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 	protected CharacterParameter    parameter;
 
 	/* TODO : this parameters split into field parameters class */
-	protected float xRange = 3.0f;
-	protected float zRange = 20.0f;
+	protected float xRange = 6.0f;
+	protected float zRange = 40.0f;
 
 	protected virtual void Awake() {
 		gameController     = Object.FindObjectOfType<GameController>();
@@ -29,10 +29,12 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 
 	protected virtual void OnGUI() {
 		playerController.OnGUI();
+		parameter.ShowHitPoint();
 	}
 
 	protected virtual void Update() {
 		positionControl();
+		velocityControl();
 	}
 
 	private void positionControl() {
@@ -40,15 +42,24 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 
 		pos.x = Mathf.Clamp(pos.x, -xRange, xRange);
 		pos.z = Mathf.Clamp(pos.z, -zRange, zRange);
-		
+
 		transform.position = pos;
 	}
-	
+
+	private void velocityControl() {
+		Vector3 pos = transform.position;
+
+		if ((xRange - Mathf.Abs(pos.x)) < float.Epsilon ||
+		    (zRange - Mathf.Abs(pos.z)) < float.Epsilon) {
+			rigidbody.velocity = Vector3.zero;
+		}
+	}
+
 	public virtual void Damage(DamageInfo info) {
 		parameter.Damage(info);
 	}
 
-	/* public methods */	
+	/* public methods */
 
 	public virtual void FocusCamera() {
 		GameObject mainCamera = GameObject.Find("Main Camera");
@@ -75,7 +86,7 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 	}
 
 	/* utils for inherited class */
-	
+
 	protected bool TryTransfromFromSkill(Skill s) {
 		bool successedTransfrom = false;
 
@@ -87,17 +98,16 @@ public class CharacterBehavior : MonoBehaviour, IDamage, IControllable {
 			successedTransfrom |= state.TryTransform(CharacterState.AttackStartShoot);
 			successedTransfrom |= state.TryTransform(CharacterState.AttackRunShoot);
 			break;
-
+		case Skill.Dash:
+			successedTransfrom |= state.TryTransform(CharacterState.AttackStartDash);
+			break;
+		case Skill.Throw:
+			successedTransfrom |= state.TryTransform(CharacterState.AttackStartThrow);
+			break;
 		default:
 			throw new UnityException("Undefined Transform for skill : " + s.ToString());
 		}
 
 		return successedTransfrom;
-	}
-
-	/* getter setter */
-	public GameController Controller {
-		get { return this.gameController; }
-		set { this.gameController = value; }
 	}
 }

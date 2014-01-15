@@ -4,7 +4,8 @@ using CharacterInterface;
 public class DMascotParameter : CharacterParameter {
 
 	public DMascotParameter() {
-		maxHitPoint = 100;
+		character   = GameSystem.SettingDefinition.Character.DMascot;
+		maxHitPoint = 2000;
 		hitPoint    = MaxHitPoint;
 	}
 

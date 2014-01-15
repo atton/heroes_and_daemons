@@ -10,7 +10,7 @@ namespace GameSystem {
 		private const Character kDefaultCharacter = Character.Slayer;
 		private const Skill     kDefaultSkillA    = Skill.Melee;
 		private const Skill     kDefaultSkillB    = Skill.Shoot;
-		private const Skill     kDefaultSkillC    = Skill.Shoot;
+		private const Skill     kDefaultSkillC    = Skill.Dash;
 
 		/* singleton */
 		private static GlobalSettings setting = new GlobalSettings();
@@ -47,7 +47,7 @@ namespace GameSystem {
 			set { this.skillB = value; }
 			get { return this.skillB; }
 		}
-		
+
 		public Skill SkillC {
 			set { this.skillC = value; }
 			get { return this.skillC; }

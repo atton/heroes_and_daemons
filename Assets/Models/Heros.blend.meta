@@ -24,6 +24,31 @@ ModelImporter:
     100036: Leg2_L
     100038: Leg2_R
     100040: neck
+    100042: Bone_001
+    100044: cheast
+    100046: cheastik
+    100048: fingers_L
+    100050: fingers_R
+    100052: foot1_L
+    100054: foot1_R
+    100056: foot2_L
+    100058: foot2_R
+    100060: footcontrol_L
+    100062: footcontrol_R
+    100064: hand4_L
+    100066: hand4_R
+    100068: Hero
+    100070: leg1_L
+    100072: leg1_R
+    100074: leg2_L
+    100076: leg2_R
+    100078: leg3_L
+    100080: leg3_R
+    100082: spine
+    100084: thumb2_L
+    100086: thumb2_R
+    100088: tumb1_L
+    100090: tumb1_R
     400000: Armature
     400002: Bone
     400004: chest
@@ -45,11 +70,49 @@ ModelImporter:
     400036: Leg2_L
     400038: Leg2_R
     400040: neck
+    400042: Bone_001
+    400044: cheast
+    400046: cheastik
+    400048: fingers_L
+    400050: fingers_R
+    400052: foot1_L
+    400054: foot1_R
+    400056: foot2_L
+    400058: foot2_R
+    400060: footcontrol_L
+    400062: footcontrol_R
+    400064: hand4_L
+    400066: hand4_R
+    400068: Hero
+    400070: leg1_L
+    400072: leg1_R
+    400074: leg2_L
+    400076: leg2_R
+    400078: leg3_L
+    400080: leg3_R
+    400082: spine
+    400084: thumb2_L
+    400086: thumb2_R
+    400088: tumb1_L
+    400090: tumb1_R
     4300000: Cube
     7400000: Default Take
     7400002: hurt
     7400004: run
     7400006: stand
+    7400008: attackingbarriel
+    7400010: attackingburst
+    7400012: attackingdash
+    7400014: attackingmelee
+    7400016: attackingshoot
+    7400018: attackingthrow
+    7400020: attackstartbarriel
+    7400022: attackstartburst
+    7400024: attackstartdash
+    7400026: attackstartmelee
+    7400028: attackstartshoot
+    7400030: attackstartthrow
+    7400032: jump
     9500000: //RootNode
     13700000: Cube
   materials:

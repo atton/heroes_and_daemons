@@ -9,9 +9,10 @@ using System.Collections;
 public class MainMenu : MonoBehaviour {
 
 	/* master server settings */
-	public const string masterServerIP   = "127.0.0.1";
-	public const int  masterServerPort   = 23466;
-	public const bool masterServerUseNat = false;
+	public bool   useMyMasterServer          = false;	// manual switch master server. mine or public
+	public const string myMasterServerIP     = "127.0.0.1";
+	public const int    myMasterServerPort   = 23466;
+	public const bool   myMasterServerUseNat = false;
 
 	/* room const values */
 	public const string gameTypeName = "heroes_and_daemons";
@@ -51,7 +52,7 @@ public class MainMenu : MonoBehaviour {
             GUILayout.Space(10);
 
             if (GUILayout.Button ("Create Room")) {
-                Network.InitializeServer(roomUserLimit, roomPort, masterServerUseNat);
+                Network.InitializeServer(roomUserLimit, roomPort, myMasterServerUseNat);
                 MasterServer.RegisterHost(gameTypeName, gameName, gameComment);
             }
 
@@ -122,8 +123,11 @@ public class MainMenu : MonoBehaviour {
 		serverListMenu = new Rect(0, 70, Screen.width, 100);
 		settingMenu    = new Rect(20, 0, 200, 50);
 
-		MasterServer.ipAddress = masterServerIP;
-		MasterServer.port      = masterServerPort;
+		if (useMyMasterServer) {
+			MasterServer.ipAddress = myMasterServerIP;
+			MasterServer.port      = myMasterServerPort;
+		}
+
 		MasterServer.dedicatedServer = true;	// count host user in number to room joined user
 	}
 

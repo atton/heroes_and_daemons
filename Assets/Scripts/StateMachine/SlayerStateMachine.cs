@@ -26,19 +26,19 @@ namespace StateMachine
 
 			SetTransformCondition(CharacterState.AttackStartBarrier, CharacterState.AttackingBarrier);
 			SetTransformCondition(CharacterState.AttackStartBarrier, CharacterState.Hurt);
-			
+
 			SetTransformCondition(CharacterState.AttackStartBurst, CharacterState.AttackingBurst);
 			SetTransformCondition(CharacterState.AttackStartBurst, CharacterState.Hurt);
-			
+
 			SetTransformCondition(CharacterState.AttackStartDash, CharacterState.AttackingDash);
 			SetTransformCondition(CharacterState.AttackStartDash, CharacterState.Hurt);
-			
+
 			SetTransformCondition(CharacterState.AttackStartMelee, CharacterState.AttackingMelee);
 			SetTransformCondition(CharacterState.AttackStartMelee, CharacterState.Hurt);
 
-			
+
 			SetTransformCondition(CharacterState.AttackStartShoot, CharacterState.AttackingShoot);
-			SetTransformCondition(CharacterState.AttackStartShoot, CharacterState.Hurt);	
+			SetTransformCondition(CharacterState.AttackStartShoot, CharacterState.Hurt);
 
 			SetTransformCondition(CharacterState.AttackStartThrow, CharacterState.AttackingThrow);
 			SetTransformCondition(CharacterState.AttackStartThrow, CharacterState.Hurt);

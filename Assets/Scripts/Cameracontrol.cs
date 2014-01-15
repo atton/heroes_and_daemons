@@ -9,7 +9,7 @@ public class Cameracontrol : MonoBehaviour {
 		//player=GameObject.Find("Slayer");
 		starterhigh=transform.position.y;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 

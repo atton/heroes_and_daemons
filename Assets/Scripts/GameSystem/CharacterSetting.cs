@@ -9,7 +9,7 @@ public class CharacterSetting : MonoBehaviour {
 	private Rect exitMenu;
 	private Rect characterSelectMenu;
 	private Rect skillSelectMenu;
-	
+
 	private const int exitMenuID            = 0;
 	private const int characterSelectMenuID = 1;
 	private const int skillSelectMenuID     = 2;
@@ -77,7 +77,7 @@ public class CharacterSetting : MonoBehaviour {
 		Skill selectedSkillB           = selectSkillFromButtons("SkillB");
 		selectedSkillB                 = (selectedSkillB == Skill.None) ? GlobalSettings.Setting.SkillB : selectedSkillB;
 		GlobalSettings.Setting.SkillB  = selectedSkillB;
-		
+
 		Skill selectedSkillC           = selectSkillFromButtons("SkillC");
 		selectedSkillC                 = (selectedSkillC == Skill.None) ? GlobalSettings.Setting.SkillC : selectedSkillC;
 		GlobalSettings.Setting.SkillC  = selectedSkillC;
@@ -98,5 +98,5 @@ public class CharacterSetting : MonoBehaviour {
 		GUILayout.EndHorizontal();
 		return Skill.None;
 	}
-		
+
 }

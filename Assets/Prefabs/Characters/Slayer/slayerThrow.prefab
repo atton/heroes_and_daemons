@@ -167,7 +167,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 111: {fileID: 11100000}
   - 114: {fileID: 11400000}
-  - 64: {fileID: 6400000}
+  - 65: {fileID: 6500000}
   m_Layer: 0
   m_Name: slayerThrow
   m_TagString: Untagged
@@ -349,8 +349,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6400000
-MeshCollider:
+--- !u!65 &6500000
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -359,9 +359,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -399,12 +398,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec2959b13d2cc46bf99d6bfd1aa118d2, type: 3}
+  m_Script: {fileID: 11500000, guid: d866a2e7c9b354597a15ea7dce210067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 100000, guid: 8b68a9b6323254b09a7206b406a967b4, type: 2}
-  shotDurationFrame: 120
-  shootDamageValue: 300
+  throwDurationFrame: 120
+  throwDamageValue: 2500
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -292,6 +292,7 @@ public class SlayerBehavior : CharacterBehavior {
 		Rigidbody throwMagic   = Instantiate(slayerThrow, spawnPoint, Quaternion.identity) as Rigidbody;
 		throwMagic.velocity    = forward * 10 + new Vector3(0, 10, 0);
 		throwMagic.transform.forward = forward;
+		throwMagic.transform.position += forward;
 	}
 
 	[RPC]

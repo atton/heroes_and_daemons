@@ -8,7 +8,7 @@ namespace CharacterSkill.Slayer {
 
 		public GameObject hitEffect;
 		public int        shotDurationFrame = 120;
-		public int        shotDamageValue   = 10;
+		public int        shotDamageValue   = 1500;
 
 		// Use this for initialization
 		void Start () {

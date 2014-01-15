@@ -296,14 +296,13 @@ public class SlayerBehavior : CharacterBehavior {
 
 	[RPC]
 	void spawnDash(Vector3 position, Vector3 forward) {
-		Vector3 spawnPoint = position + forward  + new Vector3(0, 1, 0);
-		Rigidbody dash     = Instantiate(slayerDash, spawnPoint, Quaternion.identity) as Rigidbody;
-		dash.transform.forward = forward;
-		Vector3          force = forward * 3000;
-		dash.rigidbody.AddForce(force);
-		this.rigidbody.AddForce(force);
-		
-		//Debug.Log(position);
+		Vector3 spawnPoint   = position + forward  + new Vector3(0, 1, 0);
+		Rigidbody dashEffect = Instantiate(slayerDash, spawnPoint, Quaternion.identity) as Rigidbody;
+		dashEffect.transform.forward = forward;
+		dashEffect.transform.position += forward;
+		Vector3  force = forward * 3000;
+		dashEffect.rigidbody.AddForce(force);
+		rigidbody.AddForce(force);
 	}
 
 	[RPC]

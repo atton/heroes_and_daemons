@@ -9,6 +9,8 @@ public class SlayerParameter : CharacterParameter {
 		runSpeed           = 20.0f * 1; // mass is 1
 		CoolDownFrameShoot = 100;
 		CoolDownFrameMelee = 150;
+		CoolDownFrameThrow = 300;
+		CoolDownFrameDash  = 200;
 
 		hitPoint           = MaxHitPoint;
 	}

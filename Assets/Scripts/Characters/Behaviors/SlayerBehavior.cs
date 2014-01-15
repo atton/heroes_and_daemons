@@ -308,7 +308,7 @@ public class SlayerBehavior : CharacterBehavior {
 
 	[RPC]
 	void spawnMelee(Vector3 position, Vector3 forward) {
-		Vector3 spawnPoint = position + forward;
+		Vector3 spawnPoint = position + forward + new Vector3(0, 1, 0);
 		Instantiate(slayerMelee, spawnPoint, Quaternion.identity);
 	}
 }
